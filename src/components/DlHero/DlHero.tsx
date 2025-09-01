@@ -8,7 +8,7 @@ import { ArrowDown, UserRound, FileUser } from "lucide-react";
 const DlHero = () => {
   return (
     <div
-      className="flex flex-col items-center justify-center gap-4 h-full"
+      className="flex flex-col items-center justify-center gap-4 min-h-screen relative"
       id="home"
     >
       <DlUiIcon
@@ -43,7 +43,7 @@ const DlHero = () => {
         </div>
       </div>
 
-      <div className="absolute bottom-8 transform -translate-x-1/2 animate-bounce w-full flex justify-center">
+      <div className="absolute bottom-8 left-[47%] transform -translate-x-1/2 animate-bounce">
         <ArrowDown className="h-6 w-6 text-muted-foreground text-v1-primary-600" />
       </div>
     </div>

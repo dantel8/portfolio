@@ -33,10 +33,10 @@ const DlHeader = () => {
             Portfolio
           </DlUiText>
           <div className="flex gap-2">
-            <button className="p-2 rounded-lg hover:bg-white/30 transition-all duration-300">
+            <button className="p-2 rounded-lg hover:bg-v1-primary-300/30 transition-all duration-300">
               <DlUiIcon lucideIcon={Moon} className="text-v1-neutral-700" />
             </button>
-            <button className="p-2 rounded-lg hover:bg-white/30 transition-all duration-300">
+            <button className="p-2 rounded-lg hover:bg-v1-primary-300/30 transition-all duration-300">
               <DlUiIcon
                 lucideIcon={isOpen ? X : Menu}
                 onClick={() => setIsOpen(!isOpen)}
@@ -49,7 +49,10 @@ const DlHeader = () => {
 
       {isOpen && (
         <div className="absolute top-full left-0 w-full">
-          <DlUiGlass blur={5} className="rounded-lg overflow-hidden shadow-lg">
+          <DlUiGlass
+            blur={5}
+            className="rounded-b-lg overflow-hidden shadow-lg"
+          >
             <ul className="flex flex-col">
               {menuItems.map((item) => (
                 <li key={item.label}>

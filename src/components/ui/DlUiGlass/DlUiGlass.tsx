@@ -16,6 +16,7 @@ const DlUiGlass = ({ children, className, blur = 8 }: DlUiGlassProps) => {
       style={{
         backdropFilter: `blur(${blur}px)`,
         WebkitBackdropFilter: `blur(${blur}px)`,
+        backgroundColor: "rgba(255,253,244, 0.2)",
       }}
     >
       {children}
