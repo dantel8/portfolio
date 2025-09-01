@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply box-border m-0 p-0;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-v1-primary-500 text-white hover:bg-v1-primary-600;
+  }
+}
+
+@layer utilities {
+  .scrollbar-none {
+    @apply overflow-auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
+.glass {
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8.3px);
+  -webkit-backdrop-filter: blur(8.3px);
+}
