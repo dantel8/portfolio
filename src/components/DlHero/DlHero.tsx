@@ -33,11 +33,11 @@ const DlHero = () => {
       </DlUiText>
 
       <div className="flex gap-4 max-md:flex-col">
-        <div className="bg-neutral-800 text-white p-3 rounded-lg flex items-center gap-2 text-center justify-around">
+        <div className="bg-neutral-800 text-white p-3 rounded-lg flex items-center gap-2 text-center justify-around font-semibold">
           View my projects
           <DlUiIcon lucideIcon={ArrowDown} className="text-white" size={18} />
         </div>
-        <div className="bg-v1-primary-500 text-white p-3 rounded-lg flex items-center gap-2 text-center justify-around">
+        <div className="bg-v1-primary-500 text-white p-3 rounded-lg flex items-center gap-2 text-center justify-around font-semibold">
           Download CV
           <DlUiIcon lucideIcon={FileUser} className="text-white" size={18} />
         </div>
