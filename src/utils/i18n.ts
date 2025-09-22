@@ -5,12 +5,8 @@ import en from "@/lang/en";
 
 i18next.use(initReactI18next).init({
   resources: {
-    es: {
-      translation: es,
-    },
-    en: {
-      translation: en,
-    },
+    es,
+    en,
   },
   lng: "es", // idioma por defecto
   fallbackLng: "en",

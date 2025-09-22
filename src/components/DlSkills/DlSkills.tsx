@@ -3,6 +3,7 @@
 import { DlUiText } from "@/components/ui/DlUiText";
 import { DlUiCarruselAutoScroll } from "@/components/ui/DlUiCarruselAutoScroll";
 import { EmblaOptionsType } from "embla-carousel";
+import { useTranslation } from "react-i18next";
 
 const OPTIONS: EmblaOptionsType = {
   loop: true,
@@ -71,16 +72,21 @@ const skills = [
 ];
 
 const DlSkills = () => {
+  const { t } = useTranslation("skills");
   return (
     <div id="skills" className="flex flex-col justify-center gap-8">
       <DlUiText
         type="h3"
         className="text-v1-primary-600 relative mt-10 text-center"
       >
-        Skills
+        {t("skills")}
       </DlUiText>
-      <div>
-        <DlUiCarruselAutoScroll skills={skills} options={OPTIONS} />
+      <div className="pb-5">
+        <DlUiCarruselAutoScroll
+          skills={skills}
+          options={OPTIONS}
+          imgClassName="w-12 h-12"
+        />
       </div>
     </div>
   );

@@ -13,12 +13,14 @@ type PropType = {
   skills: Skill[];
   options?: EmblaOptionsType;
   hideControls?: boolean;
+  className?: string;
+  imgClassName?: string;
 };
 
 import "@/styles/embla.css";
 
 const DlUiCarruselAutoScroll: React.FC<PropType> = (props) => {
-  const { skills, options } = props;
+  const { skills, options, className, imgClassName } = props;
   const [emblaRef] = useEmblaCarousel(options, [
     AutoScroll({
       playOnInit: true,
@@ -36,6 +38,8 @@ const DlUiCarruselAutoScroll: React.FC<PropType> = (props) => {
               <DlSkillsItems
                 name={skill.name}
                 image={`/assets/images/${skill.image}`}
+                className={className}
+                imgClassName={imgClassName}
               />
             </div>
           ))}

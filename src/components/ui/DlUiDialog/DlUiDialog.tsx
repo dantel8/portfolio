@@ -1,6 +1,6 @@
 import { helpers } from "@/utils/helpers";
 import { Dialog, DialogProps } from "primereact/dialog";
-import { HTMLAttributes, ReactNode } from "react";
+import { HTMLAttributes, ReactNode, useEffect } from "react";
 
 export interface DlUiDialogProps {
   children: ReactNode;
@@ -20,6 +20,7 @@ export interface DlUiDialogProps {
     closeButton?: string;
     closeIcon?: string;
     divider?: string;
+    mask?: string;
   };
 }
 
@@ -34,6 +35,18 @@ const DlUiDialog = ({
   visible = false,
   classNames,
 }: DlUiDialogProps) => {
+  useEffect(() => {
+    if (!visible) {
+      document.body.classList.remove("overflow-hidden");
+      return;
+    }
+    document.body.classList.add("overflow-hidden");
+
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [visible]);
+
   return (
     <Dialog
       header={header}
@@ -76,6 +89,13 @@ const DlUiDialog = ({
             "!text-neutral-900 !size-5",
             classNames?.closeIcon,
             (pt?.closeButtonIcon as HTMLAttributes<HTMLDivElement>)?.className
+          ),
+        },
+        mask: {
+          className: helpers.cn(
+            "backdrop-blur-md bg-black/30",
+            classNames?.mask,
+            (pt?.mask as HTMLAttributes<HTMLDivElement>)?.className
           ),
         },
       }}

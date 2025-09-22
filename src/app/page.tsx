@@ -5,6 +5,7 @@ import { DlHeader } from "@/components/DlHedaer";
 import { DlHero } from "@/components/DlHero";
 import { DlSkills } from "@/components/DlSkills";
 import { DlCertifications } from "@/components/DlCertifications";
+import { DlContact } from "@/components/DlContact";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
           <DlHero />
           <DlSkills />
           <DlCertifications />
+          <DlContact />
         </main>
       </div>
     </div>

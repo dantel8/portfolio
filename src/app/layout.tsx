@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import I18nProvider from "./i18n-provider";
 
 export const metadata: Metadata = {
   title: "Porfolio",
@@ -13,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-[#fffdf4]">{children}</body>
+      <body className="bg-[#fffdf4]">
+        <I18nProvider>{children}</I18nProvider>
+      </body>
     </html>
   );
 }
