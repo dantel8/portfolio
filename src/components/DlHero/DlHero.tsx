@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@/context/ThemeContext";
+import { DlUiImage } from "@/components/ui/DlUiImage";
 
 const DlHero = () => {
   const { t } = useTranslation("home");
@@ -21,12 +22,13 @@ const DlHero = () => {
       className="flex flex-col items-center justify-center gap-4 min-h-screen relative"
       id="home"
     >
-      <DlUiIcon
-        lucideIcon={UserRound}
-        className={`relative ${
-          theme === "light" ? "text-v1-primary-600" : "text-v1-primary-400"
-        }`}
-        size={100}
+      <DlUiImage
+        src="/assets/images/foto-portfolio.jpg"
+        alt="hero"
+        width={120}
+        height={120}
+        className="relative"
+        imageClassName="rounded-full"
       />
 
       <DlUiText

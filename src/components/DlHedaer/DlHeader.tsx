@@ -57,9 +57,9 @@ const DlHeader = () => {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 md:mx-20">
+    <header className="fixed top-0 left-0 right-0 z-50">
       <DlUiGlass blur={5} className="overflow-hidden">
-        <nav className="flex justify-between items-center w-full p-4 mx-auto">
+        <nav className="flex justify-between items-center w-full p-4 mx-auto md:px-20">
           <DlUiText
             type="h2"
             className={`relative ${
