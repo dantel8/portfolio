@@ -4,8 +4,11 @@ import I18nProvider from "./i18n-provider";
 import { ThemeProvider } from "@/context/ThemeContext";
 
 export const metadata: Metadata = {
-  title: "Porfolio",
-  description: "Porfolio -  Dante Lugo",
+  title: "Porfolio - Dante Lugo",
+  description: "Portfolio de Dante Lugo - Desarrollador Frontend",
+  icons: {
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+  },
 };
 
 export default function RootLayout({
