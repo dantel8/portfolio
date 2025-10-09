@@ -2,21 +2,16 @@
 
 import { DlUiText } from "@/components/ui/DlUiText";
 import { DlUiIcon } from "@/components/ui/DlUiIcon";
-import {
-  ArrowDown,
-  UserRound,
-  FileUser,
-  Linkedin,
-  Github,
-  Mail,
-} from "lucide-react";
+import { FileUser, Linkedin, Github, Mail, ArrowDown } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@/context/ThemeContext";
 import { DlUiImage } from "@/components/ui/DlUiImage";
+import { useAnalytics } from "@/hooks/useAnalytics";
 
 const DlHero = () => {
   const { t } = useTranslation("home");
   const { theme } = useTheme();
+  const { trackDownloadCV, trackLinkClick } = useAnalytics();
   return (
     <div
       className="flex flex-col items-center justify-center gap-4 min-h-screen relative"
@@ -56,12 +51,17 @@ const DlHero = () => {
         {t("description")}
       </DlUiText>
 
-      <div className="flex gap-4 max-md:flex-col">
-        <div className="bg-neutral-800 text-white p-3 rounded-lg flex items-center gap-2 text-center justify-around font-semibold">
-          {t("viewProjects")}
-          <DlUiIcon lucideIcon={ArrowDown} className="text-white" size={18} />
-        </div>
-        <div className="bg-v1-primary-500 text-white p-3 rounded-lg flex items-center gap-2 text-center justify-around font-semibold">
+      <div className="flex justify-center">
+        <div
+          className="bg-v1-primary-500 text-white p-3 rounded-lg flex items-center gap-2 text-center justify-around font-semibold cursor-pointer"
+          onClick={() => {
+            trackDownloadCV();
+            window.open(
+              "/assets/pdf/CV_Dante_Lugo_Frontend_Developer.pdf",
+              "_blank"
+            );
+          }}
+        >
           {t("downloadCV")}
           <DlUiIcon lucideIcon={FileUser} className="text-white" size={18} />
         </div>
@@ -74,9 +74,11 @@ const DlHero = () => {
             theme === "light" ? "text-v1-primary-600" : "text-v1-primary-400"
           }
           size={32}
-          onClick={() =>
-            window.open("https://www.linkedin.com/in/dantelugo/", "_blank")
-          }
+          onClick={() => {
+            const url = "https://www.linkedin.com/in/dantelugo/";
+            trackLinkClick(url, "LinkedIn");
+            window.open(url, "_blank");
+          }}
         />
         <DlUiIcon
           lucideIcon={Github}
@@ -84,7 +86,11 @@ const DlHero = () => {
             theme === "light" ? "text-v1-primary-600" : "text-v1-primary-400"
           }
           size={32}
-          onClick={() => window.open("https://github.com/dantel8", "_blank")}
+          onClick={() => {
+            const url = "https://github.com/dantel8";
+            trackLinkClick(url, "GitHub");
+            window.open(url, "_blank");
+          }}
         />
         <DlUiIcon
           lucideIcon={Mail}
@@ -92,9 +98,11 @@ const DlHero = () => {
             theme === "light" ? "text-v1-primary-600" : "text-v1-primary-400"
           }
           size={32}
-          onClick={() =>
-            window.open("mailto:dantelugo05060@gmail.com", "_blank")
-          }
+          onClick={() => {
+            const url = "mailto:dantelugo05060@gmail.com";
+            trackLinkClick(url, "Email");
+            window.open(url, "_blank");
+          }}
         />
       </div>
 
