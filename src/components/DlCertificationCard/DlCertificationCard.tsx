@@ -2,6 +2,7 @@ import { DlUiImage } from "@/components/ui/DlUiImage";
 import { DlUiText } from "@/components/ui/DlUiText";
 import { useTranslation } from "react-i18next";
 import { helpers } from "@/utils/helpers";
+import { useTheme } from "@/context/ThemeContext";
 
 interface DlCertificationCardProps {
   image: string;
@@ -14,10 +15,14 @@ interface DlCertificationCardProps {
 
 const DlCertificationCard = (props: DlCertificationCardProps) => {
   const { t } = useTranslation("certifications");
+  const { theme } = useTheme();
   return (
     <div
       className={helpers.cn(
-        "flex flex-col gap-2 items-center justify-center bg-v1-primary-400/20 p-4 rounded-lg w-max h-full cursor-pointer hover:bg-v1-primary-400/30 transition-colors",
+        "flex flex-col gap-2 items-center justify-center p-4 rounded-lg w-max h-full cursor-pointer transition-colors",
+        theme === "light"
+          ? "bg-v1-primary-400/20 hover:bg-v1-primary-400/30"
+          : "bg-v1-primary-600/20 hover:bg-v1-primary-600/30",
         props.className
       )}
       onClick={props.onClick}
@@ -29,10 +34,20 @@ const DlCertificationCard = (props: DlCertificationCardProps) => {
         height={200}
         imageClassName={props.imgClassName}
       />
-      <DlUiText type="h3" className="text-center text-wrap w-[200px]">
+      <DlUiText
+        type="h3"
+        className={`text-center text-wrap w-[200px] ${
+          theme === "light" ? "text-neutral-800" : "text-neutral-100"
+        }`}
+      >
         {t(props.title)}
       </DlUiText>
-      <DlUiText type="body1" className="text-center">
+      <DlUiText
+        type="body1"
+        className={`text-center ${
+          theme === "light" ? "text-neutral-700" : "text-neutral-300"
+        }`}
+      >
         {t("duration")}: {props.duration}
       </DlUiText>
     </div>

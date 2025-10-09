@@ -3,6 +3,7 @@ const en = {
     home: "Home",
     about: "About me",
     contact: "Contact",
+    skill: "Skills",
     projects: "Proyects",
     title: "Portfolio",
   },
@@ -35,6 +36,14 @@ const en = {
     email: "Email",
     message: "Message",
     send: "Send",
+    sending: "Sending...",
+    messageSent: "Your message has been sent successfully!",
+    messageError: "There was an error sending your message. Please try again.",
+    fillAllFields: "Please fill in all fields.",
+    contactInfo: "Contact Information",
+    phone: "Phone",
+    address: "Address",
+    disponibility: "Disponibility",
   },
 };
 

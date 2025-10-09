@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useTheme } from "@/context/ThemeContext";
 
 interface Particle {
   x: number;
@@ -13,10 +14,66 @@ interface Particle {
 }
 
 export function DlInteractiveBackground() {
+  const { theme } = useTheme();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const mouseRef = useRef({ x: 0, y: 0 });
   const animationRef = useRef<number | undefined>(undefined);
+
+  // Referencia al tema para poder detectar cambios
+  const themeRef = useRef(theme);
+
+  // Función para crear partículas (definida fuera del efecto para reutilizarla)
+  const createParticlesWithTheme = (canvas: HTMLCanvasElement) => {
+    const particles: Particle[] = [];
+    const particleCount = Math.min(
+      150,
+      Math.floor((canvas.width * canvas.height) / 15000)
+    );
+
+    // Colores para el tema claro y oscuro
+    const lightModeColors = [
+      "rgba(57, 179, 52, 0.6)", // primary-500
+      "rgba(42, 148, 37, 0.4)", // primary-600
+      "rgba(36, 116, 33, 0.3)", // primary-700
+      "rgba(33, 92, 31, 0.2)", // primary-800
+    ];
+
+    const darkModeColors = [
+      "rgba(57, 179, 52, 0.6)", // primary-500 (mantenemos el verde)
+      "rgba(42, 148, 37, 0.4)", // primary-600 (mantenemos el verde)
+      "rgba(180, 180, 180, 0.3)", // gris claro
+      "rgba(140, 140, 140, 0.2)", // gris medio
+    ];
+
+    // Seleccionar los colores según el tema actual
+    const colors =
+      themeRef.current === "dark" ? darkModeColors : lightModeColors;
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        size: Math.random() * 3 + 1,
+        opacity: Math.random() * 0.5 + 0.1,
+        color: colors[Math.floor(Math.random() * colors.length)],
+      });
+    }
+
+    particlesRef.current = particles;
+  };
+
+  // Efecto para actualizar cuando cambie el tema
+  useEffect(() => {
+    themeRef.current = theme;
+
+    // Si ya tenemos partículas, recrearlas con los nuevos colores
+    if (particlesRef.current.length > 0 && canvasRef.current) {
+      createParticlesWithTheme(canvasRef.current);
+    }
+  }, [theme]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -31,32 +88,7 @@ export function DlInteractiveBackground() {
     };
 
     const createParticles = () => {
-      const particles: Particle[] = [];
-      const particleCount = Math.min(
-        150,
-        Math.floor((canvas.width * canvas.height) / 15000)
-      );
-
-      const colors = [
-        "rgba(57, 179, 52, 0.6)", // primary-500
-        "rgba(42, 148, 37, 0.4)", // primary-600
-        "rgba(36, 116, 33, 0.3)", // primary-700
-        "rgba(33, 92, 31, 0.2)", // primary-800
-      ];
-
-      for (let i = 0; i < particleCount; i++) {
-        particles.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.5,
-          vy: (Math.random() - 0.5) * 0.5,
-          size: Math.random() * 3 + 1,
-          opacity: Math.random() * 0.5 + 0.1,
-          color: colors[Math.floor(Math.random() * colors.length)],
-        });
-      }
-
-      particlesRef.current = particles;
+      createParticlesWithTheme(canvas);
     };
 
     const drawParticles = () => {
@@ -105,9 +137,14 @@ export function DlInteractiveBackground() {
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(otherParticle.x, otherParticle.y);
-            ctx.strokeStyle = `rgba(57, 179, 52, ${
-              0.1 * (1 - distance / 120)
-            })`;
+
+            // Color de las líneas según el tema
+            const lineColor =
+              themeRef.current === "dark"
+                ? `rgba(120, 120, 120, ${0.1 * (1 - distance / 120)})` // Gris para modo oscuro
+                : `rgba(57, 179, 52, ${0.1 * (1 - distance / 120)})`; // Verde para modo claro
+
+            ctx.strokeStyle = lineColor;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }

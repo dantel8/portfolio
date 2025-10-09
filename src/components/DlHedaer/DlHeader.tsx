@@ -9,19 +9,20 @@ import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import Image from "next/image";
 import i18n from "@/utils/i18n";
+import { useTheme } from "@/context/ThemeContext";
 
 const getMenuItems = (t: (key: string) => string) => [
   {
     label: t("home"),
     href: "/",
-  },
+  } /* 
   {
     label: t("projects"),
     href: "#about",
-  },
+  }, */,
   {
-    label: t("about"),
-    href: "#contact",
+    label: t("skill"),
+    href: "#skills",
   },
   {
     label: t("contact"),
@@ -36,7 +37,7 @@ const DlHeader = () => {
   const [imgLanguage, setImgLanguage] = useState(
     i18n.language === "en" ? "en_img" : "es_img"
   );
-  const [theme, setTheme] = useState("light");
+  const { theme, toggleTheme } = useTheme();
 
   const handleChangeLanguage = () => {
     const newLang = i18n.language === "en" ? "es" : "en";
@@ -55,15 +56,16 @@ const DlHeader = () => {
     };
   }, []);
 
-  const handleChangeTheme = () => {
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
-  };
-
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
+    <header className="fixed top-0 left-0 right-0 z-50 md:mx-20">
       <DlUiGlass blur={5} className="overflow-hidden">
         <nav className="flex justify-between items-center w-full p-4 mx-auto">
-          <DlUiText type="h2" className="text-v1-primary-600 relative">
+          <DlUiText
+            type="h2"
+            className={`relative ${
+              theme === "light" ? "text-v1-primary-600" : "text-v1-primary-400"
+            }`}
+          >
             {t("title")}
           </DlUiText>
           <div className="flex gap-2">
@@ -80,18 +82,26 @@ const DlHeader = () => {
             </button>
             <button
               className="p-2 rounded-lg hover:bg-v1-primary-300/30 transition-all duration-300"
-              onClick={handleChangeTheme}
+              onClick={toggleTheme}
             >
               <DlUiIcon
                 lucideIcon={theme === "light" ? Moon : Sun}
-                className="text-v1-neutral-700"
+                className={
+                  theme === "light"
+                    ? "text-v1-neutral-700"
+                    : "text-v1-neutral-100"
+                }
               />
             </button>
             <button className="p-2 rounded-lg hover:bg-v1-primary-300/30 transition-all duration-300">
               <DlUiIcon
                 lucideIcon={isOpen ? X : Menu}
                 onClick={() => setIsOpen(!isOpen)}
-                className="text-v1-neutral-700"
+                className={
+                  theme === "light"
+                    ? "text-v1-neutral-700"
+                    : "text-v1-neutral-100"
+                }
               />
             </button>
           </div>
@@ -108,7 +118,12 @@ const DlHeader = () => {
               {getMenuItems(t).map((item) => (
                 <li key={item.label}>
                   <Link
-                    className="block px-4 py-3 text-v1-neutral-700 font-semibold hover:text-v1-primary-500 transition-ease-in-out duration-300"
+                    className={`block px-4 py-3 font-semibold transition-ease-in-out duration-300
+                      ${
+                        theme === "light"
+                          ? "text-v1-neutral-700 hover:text-v1-primary-500"
+                          : "text-v1-neutral-100 hover:text-v1-primary-400"
+                      }`}
                     href={item.href}
                     onClick={() => setIsOpen(false)}
                   >

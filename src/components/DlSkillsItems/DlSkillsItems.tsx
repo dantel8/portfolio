@@ -1,6 +1,7 @@
 import { DlUiImage } from "@/components/ui/DlUiImage";
 import { DlUiText } from "@/components/ui/DlUiText";
 import { helpers } from "@/utils/helpers";
+import { useTheme } from "@/context/ThemeContext";
 
 interface DlSkillsItemsProps {
   name: string;
@@ -10,6 +11,7 @@ interface DlSkillsItemsProps {
 }
 
 const DlSkillsItems = (props: DlSkillsItemsProps) => {
+  const { theme } = useTheme();
   return (
     <div
       className={helpers.cn(
@@ -24,7 +26,12 @@ const DlSkillsItems = (props: DlSkillsItemsProps) => {
         height={90}
         className={props.imgClassName}
       />
-      <DlUiText type="h3" className="text-center text-base">
+      <DlUiText
+        type="h3"
+        className={`text-center text-base ${
+          theme === "light" ? "text-neutral-800" : "text-neutral-200"
+        }`}
+      >
         {props.name}
       </DlUiText>
     </div>

@@ -5,6 +5,17 @@
   --slide-spacing: 1.2rem;
   --slide-size: min-content;
 }
+
+@media (min-width: 1024px) {
+  .embla {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    margin: auto;
+  }
+}
 .embla__viewport {
   overflow: hidden;
 }

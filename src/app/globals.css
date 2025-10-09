@@ -2,6 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Estilos para el tema claro (por defecto) */
+:root {
+  --background-color: #fffdf4;
+  --text-color: #333333;
+}
+
+/* Estilos para el tema oscuro */
+html.dark body {
+  --background-color: #1e1e1e;
+  --text-color: #f5f5f5;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* Estilos para el tema claro */
+html.light body {
+  --background-color: #fffdf4;
+  --text-color: #333333;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
 @layer base {
   * {
     @apply box-border m-0 p-0;

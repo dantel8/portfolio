@@ -4,6 +4,7 @@ import { DlUiText } from "@/components/ui/DlUiText";
 import { DlUiCarruselAutoScroll } from "@/components/ui/DlUiCarruselAutoScroll";
 import { EmblaOptionsType } from "embla-carousel";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@/context/ThemeContext";
 
 const OPTIONS: EmblaOptionsType = {
   loop: true,
@@ -73,11 +74,14 @@ const skills = [
 
 const DlSkills = () => {
   const { t } = useTranslation("skills");
+  const { theme } = useTheme();
   return (
     <div id="skills" className="flex flex-col justify-center gap-8">
       <DlUiText
         type="h3"
-        className="text-v1-primary-600 relative mt-10 text-center"
+        className={`relative mt-10 text-center ${
+          theme === "light" ? "text-v1-primary-600" : "text-v1-primary-400"
+        }`}
       >
         {t("skills")}
       </DlUiText>

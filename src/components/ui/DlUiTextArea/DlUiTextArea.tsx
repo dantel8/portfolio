@@ -121,7 +121,7 @@ const DlUiTextArea = ({
           onChange={onChange}
           className={helpers.cn(
             "w-full min-h-[120px] rounded-xl border border-neutral-300 transition-colors outline-none px-4 py-3",
-            "hover:border-neutral-400 focus:border-primary-500 focus:shadow-none",
+            "focus:shadow-none",
             {
               "pl-12": Boolean(icon),
               "pr-16": Boolean(props.maxLength),

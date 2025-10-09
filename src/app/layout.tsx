@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import I18nProvider from "./i18n-provider";
+import { ThemeProvider } from "@/context/ThemeContext";
 
 export const metadata: Metadata = {
   title: "Porfolio",
@@ -14,8 +15,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-[#fffdf4]">
-        <I18nProvider>{children}</I18nProvider>
+      <body className="transition-colors duration-300">
+        <ThemeProvider>
+          <I18nProvider>{children}</I18nProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

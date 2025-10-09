@@ -2,6 +2,7 @@ const es = {
   header: {
     home: "Inicio",
     about: "Sobre mí",
+    skill: "Habilidades",
     contact: "Contacto",
     projects: "Proyectos",
     title: "Portfolio"
@@ -35,6 +36,14 @@ const es = {
     email: "Email",
     message: "Mensaje",
     send: "Enviar",
+    sending: "Enviando...",
+    messageSent: "¡Tu mensaje ha sido enviado con éxito!",
+    messageError: "Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo.",
+    fillAllFields: "Por favor, completa todos los campos.",
+    contactInfo: "Información de contacto",
+    phone: "Teléfono",
+    address: "Dirección",
+    disponibility: "Disponibilidad",
   },
 };
 

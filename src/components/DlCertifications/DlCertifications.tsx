@@ -7,6 +7,7 @@ import { DlUiCarrouselAutoPlay } from "@/components/ui/DlUiCarrouselAutoPlay";
 import { DlCertificationCard } from "@/components/DlCertificationCard";
 import { DlDialogCertificate } from "@/components/DlDialogCertificate";
 import { useState } from "react";
+import { useTheme } from "@/context/ThemeContext";
 
 const certifications = [
   {
@@ -65,6 +66,7 @@ const OPTIONS: EmblaOptionsType = {
 
 const DlCertifications = () => {
   const { t } = useTranslation("certifications");
+  const { theme } = useTheme();
   const [openCard, setOpenCard] = useState(false);
   const [selectedCert, setSelectedCert] = useState({
     image: "",
@@ -82,7 +84,9 @@ const DlCertifications = () => {
       <div className="flex flex-col gap-8">
         <DlUiText
           type="h3"
-          className="text-v1-primary-600 relative text-center"
+          className={`relative text-center ${
+            theme === "light" ? "text-v1-primary-600" : "text-v1-primary-400"
+          }`}
         >
           {t("certifications")}
         </DlUiText>
