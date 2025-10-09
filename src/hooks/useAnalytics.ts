@@ -15,7 +15,6 @@ export const useAnalytics = () => {
         event_label: label,
         value: value,
       });
-      console.log(`Analytics event tracked: ${action} - ${category} - ${label || ''}`);
     }
   };
 
@@ -29,17 +28,9 @@ export const useAnalytics = () => {
 
   const trackLinkClick = (url: string, name: string) => {
     trackEvent({
-      action: 'click',
-      category: 'external_link',
-      label: `${name}: ${url}`,
-    });
-  };
-
-  const trackInternalNavigation = (sectionId: string) => {
-    trackEvent({
-      action: 'navigation',
-      category: 'internal_link',
-      label: sectionId,
+      action: `click_${name.toLowerCase()}`,
+      category: 'social_link',
+      label: url,
     });
   };
 
@@ -47,7 +38,6 @@ export const useAnalytics = () => {
     trackEvent,
     trackDownloadCV,
     trackLinkClick,
-    trackInternalNavigation,
   };
 };
 
