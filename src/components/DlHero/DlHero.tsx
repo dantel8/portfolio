@@ -23,7 +23,7 @@ const DlHero = () => {
       id="home"
     >
       <DlUiImage
-        src="/assets/images/foto-portfolio.jpg"
+        src="/assets/images/foto-portfolio.png"
         alt="hero"
         width={120}
         height={120}
