@@ -29,6 +29,13 @@ const en = {
     react: "React.JS Developer",
     angular: "Angular",
   },
+  contact: {
+    contact: "Contact",
+    name: "Name",
+    email: "Email",
+    message: "Message",
+    send: "Send",
+  },
 };
 
 export default en;

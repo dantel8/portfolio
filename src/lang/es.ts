@@ -29,6 +29,13 @@ const es = {
     react: "React.JS Developer",
     angular: "Angular",
   },
+  contact: {
+    contact: "Contacto",
+    name: "Nombre",
+    email: "Email",
+    message: "Mensaje",
+    send: "Enviar",
+  },
 };
 
 export default es;

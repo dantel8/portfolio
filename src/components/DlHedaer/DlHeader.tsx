@@ -31,13 +31,8 @@ const getMenuItems = (t: (key: string) => string) => [
 
 const DlHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { t, i18n: i18nInstance } = useTranslation("header");
+  const { t } = useTranslation("header");
 
-  console.log("Current language:", i18nInstance.language);
-  console.log(
-    "Header translations:",
-    i18nInstance.getResourceBundle(i18nInstance.language, "header")
-  );
   const [imgLanguage, setImgLanguage] = useState(
     i18n.language === "en" ? "en_img" : "es_img"
   );
@@ -45,14 +40,12 @@ const DlHeader = () => {
 
   const handleChangeLanguage = () => {
     const newLang = i18n.language === "en" ? "es" : "en";
-    console.log("Changing language to:", newLang);
     i18n.changeLanguage(newLang);
   };
 
   useEffect(() => {
     const handleLanguageChanged = () => {
       setImgLanguage(i18n.language === "en" ? "en_img" : "es_img");
-      console.log("Language changed to:", i18n.language);
     };
 
     i18n.on("languageChanged", handleLanguageChanged);
