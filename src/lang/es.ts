@@ -10,7 +10,7 @@ const es = {
   home: {
     name: "Dante Lugo",
     subtitle: "Desarrollador Full Stack",
-    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid nesciunt nemo rerum facilis dignissimos eum perspiciatis earum recusandae cum mollitia corporis",
+    description: "Hola, soy Dante Lugo, desarrollador Frontend especializado en React. Disfruto transformar requerimientos en productos usables, priorizando rendimiento, accesibilidad y mantenibilidad del código. Complemento la práctica diaria con mi formación académica —Lic. en Sistemas (4º año)— para equilibrar soluciones pragmáticas con fundamentos teóricos. En mis proyectos suelo utilizar TypeScript para robustez, TailwindCSS para velocidad de prototipado y consistencia visual, y herramientas de calidad (linters, tests y CI) para sostener el crecimiento. Me motivan los equipos colaborativos, la mejora continua y los desafíos donde una buena experiencia de usuario tiene impacto directo en el negocio.",
     viewProjects: "Ver proyectos",
     downloadCV: "Descargar CV",
   },
