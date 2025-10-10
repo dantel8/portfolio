@@ -18,7 +18,7 @@ const DlHero = () => {
       id="home"
     >
       <DlUiImage
-        src="/assets/images/foto-portfolio.png"
+        src="/assets/images/foto-porfolio.png"
         alt="hero"
         width={120}
         height={120}
@@ -44,7 +44,7 @@ const DlHero = () => {
       </DlUiText>
       <DlUiText
         type="body1"
-        className={`relative px-6 mb-4 text-center ${
+        className={`relative px-6 mb-4 text-center w-3/5 ${
           theme === "light" ? "text-neutral-600" : "text-neutral-300"
         }`}
       >
