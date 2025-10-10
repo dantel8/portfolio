@@ -266,7 +266,7 @@ const DlContact = () => {
         <ContactInfoItem
           icon={Briefcase}
           label={t("disponibility")}
-          value="Lunes a Viernes, 9:00 AM - 6:00 PM"
+          value={t("hours")}
         />
       </div>
     </div>

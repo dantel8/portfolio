@@ -44,6 +44,7 @@ const en = {
     phone: "Phone",
     address: "Address",
     disponibility: "Disponibility",
+    hours: "Monday to Friday, 9:00 AM - 6:00 PM",
   },
 };
 
