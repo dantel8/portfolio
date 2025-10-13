@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { useTheme } from "@/context/ThemeContext";
 import { DlUiImage } from "@/components/ui/DlUiImage";
 import { useAnalytics } from "@/hooks/useAnalytics";
+import { DlRenderSeeMore } from "@/components/DlRenderSeeMore";
 
 const DlHero = () => {
   const { t } = useTranslation("home");
@@ -14,8 +15,11 @@ const DlHero = () => {
   const { trackDownloadCV, trackLinkClick } = useAnalytics();
   return (
     <div
-      className="flex flex-col items-center justify-center gap-4 min-h-screen relative"
+      className="flex flex-col items-center gap-4 min-h-screen relative py-20 md:py-20"
       id="home"
+      style={{
+        justifyContent: "safe center",
+      }}
     >
       <DlUiImage
         src="/assets/images/foto-porfolio.png"
@@ -42,14 +46,21 @@ const DlHero = () => {
       >
         {t("subtitle")}
       </DlUiText>
-      <DlUiText
-        type="body1"
-        className={`relative px-6 mb-4 text-center w-3/5 ${
-          theme === "light" ? "text-neutral-600" : "text-neutral-300"
-        }`}
-      >
-        {t("description")}
-      </DlUiText>
+      <DlRenderSeeMore
+        content={t("description")}
+        maxWords={30}
+        namespace="home"
+        scrollToTopOnCollapse={true}
+        className="relative px-6 mb-4 md:w-3/5"
+        pt={{
+          content: {
+            type: "body1",
+            className: `text-center ${
+              theme === "light" ? "text-neutral-600" : "text-neutral-300"
+            }`,
+          },
+        }}
+      />
 
       <div className="flex justify-center">
         <div

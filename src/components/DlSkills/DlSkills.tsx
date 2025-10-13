@@ -31,6 +31,10 @@ const skills = [
     image: "TypeScript.png",
   },
   {
+    name: "Angular",
+    image: "Angular.png",
+  },
+  {
     name: "Vue.js",
     image: "Vue.js.png",
   },

@@ -13,6 +13,15 @@ const en = {
     description: "Hi, I'm Dante Lugo, a frontend developer specializing in React. I enjoy transforming requirements into usable products, prioritizing performance, accessibility, and code maintainability. I complement my daily practice with my academic training—a bachelor's degree in computer science (4th year)—to balance pragmatic solutions with theoretical foundations. In my projects, I often use TypeScript for robustness, TailwindCSS for prototyping speed and visual consistency, and quality tools (linters, tests, and CI) to sustain growth. I am motivated by collaborative teams, continuous improvement, and challenges where a good user experience has a direct impact on the business.",
     viewProjects: "View my projects",
     downloadCV: "Download CV",
+    see_more: "See more",
+    see_less: "See less",
+  },
+  projects: {
+    projects: "Projects",
+    see_more: "See more",
+    see_less: "See less",
+    view_project: "View project",
+    description_notes_app: "A complete notes app with authentication and categories. Built with React, TypeScript and PostgreSQL.",
   },
   skills: {
     skills: "Skills",
