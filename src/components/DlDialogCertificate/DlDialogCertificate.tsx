@@ -24,12 +24,28 @@ const DlDialogCertificate = ({
       onClose={onClose}
       visible={true}
       header={
-        <div className={`text-xl font-bold ${
-          theme === "light" ? "text-v1-primary-600" : "text-v1-primary-400"
-        }`}>
+        <div
+          className={`text-xl font-bold ${
+            theme === "light"
+              ? "text-v1-primary-600 bg-white"
+              : "text-v1-primary-400 bg-neutral-800"
+          }`}
+        >
           {t(title)}
         </div>
       }
+      pt={{
+        header: {
+          className: `text-xl font-bold ${
+            theme === "light" ? "bg-white" : "bg-neutral-800"
+          }`,
+        },
+        content: {
+          className: `text-xl font-bold ${
+            theme === "light" ? "bg-white" : "bg-neutral-800"
+          }`,
+        },
+      }}
     >
       <div className="w-full">
         <DlCertificationCard
@@ -38,8 +54,8 @@ const DlDialogCertificate = ({
           duration={duration}
           onClick={() => {}}
           className={`w-full ${
-            theme === "light" 
-              ? "bg-white hover:bg-white" 
+            theme === "light"
+              ? "bg-white hover:bg-white"
               : "bg-neutral-800 hover:bg-neutral-800"
           }`}
           imgClassName="w-full"

@@ -1,6 +1,9 @@
+"use client";
+
 import { helpers } from "@/utils/helpers";
 import { Dialog, DialogProps } from "primereact/dialog";
 import { HTMLAttributes, ReactNode, useEffect } from "react";
+import { useTheme } from "@/context/ThemeContext";
 
 export interface DlUiDialogProps {
   children: ReactNode;
@@ -35,6 +38,8 @@ const DlUiDialog = ({
   visible = false,
   classNames,
 }: DlUiDialogProps) => {
+  const { theme } = useTheme();
+
   useEffect(() => {
     if (!visible) {
       document.body.classList.remove("overflow-hidden");
@@ -58,7 +63,8 @@ const DlUiDialog = ({
       pt={{
         root: {
           className: helpers.cn(
-            "!rounded-3xl bg-white shadow-lg",
+            "!rounded-3xl shadow-lg",
+            theme === "light" ? "bg-white" : "bg-neutral-900",
             classNames?.root,
             (pt?.root as HTMLAttributes<HTMLDivElement>)?.className
           ),
@@ -79,14 +85,16 @@ const DlUiDialog = ({
         },
         closeButton: {
           className: helpers.cn(
-            "!shadow-none hover:bg-neutral-100 transition-colors",
+            "!shadow-none transition-colors",
+            theme === "light" ? "hover:bg-neutral-100" : "hover:bg-neutral-800",
             classNames?.closeButton,
             (pt?.closeButton as HTMLAttributes<HTMLDivElement>)?.className
           ),
         },
         closeButtonIcon: {
           className: helpers.cn(
-            "!text-neutral-900 !size-5",
+            "!size-5",
+            theme === "light" ? "!text-neutral-900" : "!text-neutral-100",
             classNames?.closeIcon,
             (pt?.closeButtonIcon as HTMLAttributes<HTMLDivElement>)?.className
           ),
@@ -104,7 +112,8 @@ const DlUiDialog = ({
     >
       <hr
         className={helpers.cn(
-          "absolute left-0 right-0 top-0 mx-6 border-neutral-200",
+          "absolute left-0 right-0 top-0 mx-6",
+          theme === "light" ? "border-neutral-200" : "border-neutral-700",
           classNames?.divider,
           pt?.hrHeader
         )}
