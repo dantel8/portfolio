@@ -21,8 +21,8 @@ const DlCertificationCard = (props: DlCertificationCardProps) => {
       className={helpers.cn(
         "flex flex-col gap-2 items-center justify-center p-4 rounded-lg w-max h-full cursor-pointer transition-colors",
         theme === "light"
-          ? "bg-v1-primary-400/20 hover:bg-v1-primary-400/30"
-          : "bg-v1-primary-600/20 hover:bg-v1-primary-600/30",
+          ? "bg-v1-primary-200 hover:bg-v1-primary-300"
+          : "bg-v1-primary-900 hover:bg-v1-primary-800",
         props.className
       )}
       onClick={props.onClick}
