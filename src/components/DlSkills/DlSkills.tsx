@@ -60,7 +60,7 @@ const skills = [
   },
   {
     name: "C++",
-    image: "C++ (CPlusPlus).png",
+    image: "Cpp.png",
   },
   {
     name: "MySQL",

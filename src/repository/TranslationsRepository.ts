@@ -14,7 +14,6 @@ interface TranslateParams {
 export class TranslationsRepository {
   async translate(params: TranslateParams): Promise<TranslatedText> {
     try {
-      // Construir la URL con los parámetros de consulta
       const url = new URL("https://api.mymemory.translated.net/get");
       url.searchParams.append("q", params.text);
       url.searchParams.append("langpair", `${params.from_lng}|${params.to_lng}`);
@@ -32,7 +31,6 @@ export class TranslationsRepository {
 
       const data = await response.json();
 
-      // Verificar si la respuesta contiene los datos esperados
       if (!data.responseData?.translatedText) {
         throw new Error("Invalid translation response");
       }
@@ -49,7 +47,7 @@ export class TranslationsRepository {
         text: params.text,
         from_lng: params.from_lng,
         to_lng: params.to_lng,
-        translated_text: params.text, // fallback to original text
+        translated_text: params.text,
       };
     }
   }

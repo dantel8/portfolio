@@ -38,7 +38,7 @@ const DlCardProject = (props: DlCardProjectProps) => {
 
   return (
     <div
-      className={`flex flex-col gap-2 p-4 rounded-lg shadow-lg hover:shadow-xl transition-all ${
+      className={`flex flex-col gap-2 p-4 w-[600px] rounded-lg shadow-lg hover:shadow-xl transition-all ${
         theme === "light"
           ? "bg-white shadow-neutral-200 hover:shadow-neutral-300"
           : "bg-neutral-900 shadow-neutral-950 hover:shadow-black"
@@ -52,9 +52,9 @@ const DlCardProject = (props: DlCardProjectProps) => {
         <DlUiImage
           src={getPreviewImage()}
           alt={props.title}
-          width={1200}
-          height={630}
-          imageClassName="w-full h-auto object-cover"
+          width={400}
+          height={400}
+          imageClassName="w-[600px] h-auto object-cover"
         />
       </div>
       <DlUiText

@@ -18,13 +18,19 @@ const DlProjects = () => {
       >
         {t("projects")}
       </DlUiText>
-      <div className="flex flex-col gap-4">
+      <div className="flex gap-4 justify-evenly flex-wrap">
         <DlCardProject
           useAutoPreview
           title="Notes App"
           description={t("description_notes_app")}
           link="https://notes-app-lugo.onrender.com/"
         />
+        {/* <DlCardProject
+          useAutoPreview
+          title="Applyflow"
+          description={t("description_applyflow")}
+          link="/"
+        /> */}
       </div>
     </div>
   );

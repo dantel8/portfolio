@@ -35,7 +35,6 @@ const DlUiImage = (props: DlUiImageProps) => {
   const [imgSrc, setImgSrc] = useState(props.src);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Lógica para determinar si usar fill
   const hasExplicitDimensions = Boolean(width && height);
   const hasContainerDimensions = Boolean(
     className && (className.includes("w-") || className.includes("h-"))

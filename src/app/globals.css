@@ -2,13 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Estilos para el tema claro (por defecto) */
 :root {
   --background-color: #fffdf4;
   --text-color: #333333;
+  scroll-behavior: smooth;
 }
 
-/* Estilos para el tema oscuro */
 html.dark body {
   --background-color: #1e1e1e;
   --text-color: #f5f5f5;

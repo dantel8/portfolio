@@ -4,6 +4,7 @@ import { DlGeometricShapes } from "@/components/ui/DlGeometricShapes/DlGeometric
 import { DlHeader } from "@/components/DlHedaer";
 import { DlHero } from "@/components/DlHero";
 import { DlSkills } from "@/components/DlSkills";
+import { DlExperience } from "@/components/DlExperience";
 import { DlProjects } from "@/components/DlProjects";
 import { DlCertifications } from "@/components/DlCertifications";
 import { DlContact } from "@/components/DlContact";
@@ -20,6 +21,7 @@ export default function Home() {
         <main>
           <DlHero />
           <DlSkills />
+          <DlExperience />
           <DlProjects />
           <DlCertifications />
           <DlContact />
