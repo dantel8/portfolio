@@ -69,6 +69,8 @@ const es = {
     address: "Dirección",
     disponibility: "Disponibilidad",
     hours: "Lunes a Viernes, 9:00 AM - 6:00 PM",
+    emailCopied: "Correo copiado al portapapeles",
+    emailCopyError: "No se pudo copiar el correo",
   },
 };
 

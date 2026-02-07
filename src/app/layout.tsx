@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import I18nProvider from "./i18n-provider";
 import { ThemeProvider } from "@/context/ThemeContext";
+import { NotificationProvider } from "@/context/NotificationContext";
 import GoogleAnalytics from "./GoogleAnalytics";
 
 export const metadata: Metadata = {
@@ -22,7 +23,9 @@ export default function RootLayout({
       <body className="transition-colors duration-300">
         <GoogleAnalytics measurementId="G-DQRPDKC078" />
         <ThemeProvider>
-          <I18nProvider>{children}</I18nProvider>
+          <NotificationProvider>
+            <I18nProvider>{children}</I18nProvider>
+          </NotificationProvider>
         </ThemeProvider>
       </body>
     </html>

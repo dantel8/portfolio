@@ -7,51 +7,18 @@ import { DlUiButton } from "@/components/ui/DlUiButton";
 import { DlUiIcon } from "@/components/ui/DlUiIcon";
 import { DlUiTextArea } from "@/components/ui/DlUiTextArea";
 import { useContactForm } from "@/hooks/useContactForm";
-import { useEffect, useState } from "react";
+import { useNotification } from "@/hooks/useNotification";
+import { useEffect } from "react";
 import { Mail, MapPin, Phone, Briefcase, LucideIcon, Copy } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
-
-interface NotificationMessageProps {
-  show: boolean;
-  fadeOut: boolean;
-  type: "success" | "error";
-  message: string;
-}
-
-const NotificationMessage = ({
-  show,
-  fadeOut,
-  type,
-  message,
-}: NotificationMessageProps) => {
-  const { theme } = useTheme();
-  if (!show) return null;
-
-  const colorClass =
-    type === "success"
-      ? theme === "light"
-        ? "text-v1-primary-700"
-        : "text-v1-primary-400"
-      : theme === "light"
-      ? "text-v1-error-400"
-      : "text-v1-error-300";
-
-  return (
-    <p
-      className={`${colorClass} text-center transition-opacity duration-500 ${
-        fadeOut ? "animate-fade-out" : "animate-fade-in"
-      }`}
-    >
-      {message}
-    </p>
-  );
-};
 
 interface ContactInfoItemProps {
   icon: LucideIcon;
   label: string;
   copyable?: boolean;
   value: string;
+  copyMessage?: string;
+  copyErrorMessage?: string;
 }
 
 const ContactInfoItem = ({
@@ -59,8 +26,21 @@ const ContactInfoItem = ({
   label,
   copyable,
   value,
+  copyMessage,
+  copyErrorMessage,
 }: ContactInfoItemProps) => {
   const { theme } = useTheme();
+  const notify = useNotification();
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(value);
+      if (copyMessage) notify({ message: copyMessage, type: "success" });
+    } catch (error) {
+      if (copyErrorMessage) notify({ message: copyErrorMessage, type: "error" });
+    }
+  };
+
   return (
     <div className="flex items-center gap-2">
       <DlUiIcon
@@ -91,9 +71,7 @@ const ContactInfoItem = ({
       </div>
       {copyable && (
         <button
-          onClick={() => {
-            navigator.clipboard.writeText(value);
-          }}
+          onClick={handleCopy}
           className={`ml-auto p-2 rounded-full ${
             theme === "light"
               ? "text-v1-primary-600 bg-v1-primary-600/10"
@@ -113,35 +91,19 @@ const ContactInfoItem = ({
 const DlContact = () => {
   const { t } = useTranslation("contact");
   const { theme } = useTheme();
-  const [showMessage, setShowMessage] = useState(false);
-  const [fadeOut, setFadeOut] = useState(false);
-  const [messageType, setMessageType] = useState<"success" | "error" | null>(
-    null
-  );
+  const notify = useNotification();
 
   const { formData, loading, status, handleChange, handleSubmit } =
     useContactForm();
 
+  // Notificar estados de envío con toasts globales
   useEffect(() => {
-    if (status === "success" || status === "error") {
-      setFadeOut(false);
-      setShowMessage(true);
-      setMessageType(status);
-
-      const fadeTimer = setTimeout(() => {
-        setFadeOut(true);
-      }, 2500);
-
-      const hideTimer = setTimeout(() => {
-        setShowMessage(false);
-      }, 3000);
-
-      return () => {
-        clearTimeout(fadeTimer);
-        clearTimeout(hideTimer);
-      };
+    if (status === "success") {
+      notify({ message: t("messageSent"), type: "success" });
+    } else if (status === "error") {
+      notify({ message: t("messageError"), type: "error" });
     }
-  }, [status]);
+  }, [status, notify, t]);
 
   const onSubmit = async (e: React.FormEvent) => {
     const result = await handleSubmit(e);
@@ -234,20 +196,6 @@ const DlContact = () => {
           >
             {loading ? t("sending") : t("send")}
           </DlUiButton>
-
-          <NotificationMessage
-            show={showMessage && messageType === "success"}
-            fadeOut={fadeOut}
-            type="success"
-            message={t("messageSent")}
-          />
-
-          <NotificationMessage
-            show={showMessage && messageType === "error"}
-            fadeOut={fadeOut}
-            type="error"
-            message={t("messageError")}
-          />
         </form>
       </div>
       <div
@@ -267,8 +215,10 @@ const DlContact = () => {
         <ContactInfoItem
           icon={Mail}
           label={t("email")}
-          value="dantelugo05060@gmail.com"
+          value="dantelugo050602@gmail.com"
           copyable
+          copyMessage={t("emailCopied")}
+          copyErrorMessage={t("emailCopyError")}
         />
 
         <ContactInfoItem

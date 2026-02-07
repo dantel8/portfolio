@@ -69,6 +69,8 @@ const en = {
     address: "Address",
     disponibility: "Disponibility",
     hours: "Monday to Friday, 9:00 AM - 6:00 PM",
+    emailCopied: "Email copied to clipboard",
+    emailCopyError: "Unable to copy the email",
   },
 };
 
