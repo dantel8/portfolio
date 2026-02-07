@@ -68,7 +68,7 @@ const DlHero = () => {
           onClick={() => {
             trackDownloadCV();
             window.open(
-              "/assets/pdf/CV_Dante_Lugo_Frontend_Developer.pdf",
+              "/assets/pdf/DanteLugoFullStack.pdf",
               "_blank"
             );
           }}
