@@ -17,7 +17,7 @@ const DlUiTrackedLink: React.FC<DlUiTrackedLinkProps> = ({
   href,
   children,
   className = "",
-  category = "link",
+  category: _category = "link",
   label,
   isExternal = false,
   onClick,

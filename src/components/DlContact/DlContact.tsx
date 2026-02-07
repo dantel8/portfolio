@@ -36,7 +36,7 @@ const ContactInfoItem = ({
     try {
       await navigator.clipboard.writeText(value);
       if (copyMessage) notify({ message: copyMessage, type: "success" });
-    } catch (error) {
+    } catch {
       if (copyErrorMessage) notify({ message: copyErrorMessage, type: "error" });
     }
   };
