@@ -8,7 +8,7 @@ import { DlUiIcon } from "@/components/ui/DlUiIcon";
 import { DlUiTextArea } from "@/components/ui/DlUiTextArea";
 import { useContactForm } from "@/hooks/useContactForm";
 import { useEffect, useState } from "react";
-import { Mail, MapPin, Phone, Briefcase, LucideIcon } from "lucide-react";
+import { Mail, MapPin, Phone, Briefcase, LucideIcon, Copy } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
 
 interface NotificationMessageProps {
@@ -50,12 +50,14 @@ const NotificationMessage = ({
 interface ContactInfoItemProps {
   icon: LucideIcon;
   label: string;
+  copyable?: boolean;
   value: string;
 }
 
 const ContactInfoItem = ({
   icon: Icon,
   label,
+  copyable,
   value,
 }: ContactInfoItemProps) => {
   const { theme } = useTheme();
@@ -87,6 +89,23 @@ const ContactInfoItem = ({
           {value}
         </span>
       </div>
+      {copyable && (
+        <button
+          onClick={() => {
+            navigator.clipboard.writeText(value);
+          }}
+          className={`ml-auto p-2 rounded-full ${
+            theme === "light"
+              ? "text-v1-primary-600 bg-v1-primary-600/10"
+              : "text-v1-primary-400 bg-v1-primary-400/10"
+          }`}
+        >
+          <DlUiIcon
+            lucideIcon={Copy}
+            size={20}
+          />
+        </button>
+      )}
     </div>
   );
 };
@@ -249,6 +268,7 @@ const DlContact = () => {
           icon={Mail}
           label={t("email")}
           value="dantelugo05060@gmail.com"
+          copyable
         />
 
         <ContactInfoItem
