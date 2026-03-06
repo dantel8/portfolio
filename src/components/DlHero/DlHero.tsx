@@ -9,6 +9,7 @@ import { DlUiImage } from "@/components/ui/DlUiImage";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { DlRenderSeeMore } from "@/components/DlRenderSeeMore";
 import { useDownloadCV } from "@/hooks/useDownloadCV";
+import { DlUiButton } from "@/components/ui/DlUiButton";
 
 const DlHero = () => {
   const { t } = useTranslation("home");
@@ -25,9 +26,10 @@ const DlHero = () => {
     >
       <DlUiImage
         src="/assets/images/foto-porfolio.png"
-        alt="hero"
+        alt="Foto de perfil de Dante Lugo"
         width={120}
         height={120}
+        priority
         className="relative"
         imageClassName="rounded-full"
       />
@@ -65,57 +67,70 @@ const DlHero = () => {
       />
 
       <div className="flex justify-center">
-        <div
-          className="bg-v1-primary-500 text-white p-3 rounded-lg flex items-center gap-2 text-center justify-around font-semibold cursor-pointer"
-          onClick={() => {
+        <DlUiButton
+          type="button"
+          aria-label={t("downloadCV")}
+          className="flex !bg-v1-primary-500 hover:!bg-v1-primary-600 text-white !h-auto !px-4 !py-3 !rounded-lg font-semibold"
+          onClick={() =>
             downloadCV(
               "/assets/pdf/DanteLugoFrontendCV.pdf",
               "DanteLugoFrontendCV.pdf"
-            );
-          }}
+            )
+          }
         >
           {t("downloadCV")}
           <DlUiIcon lucideIcon={FileUser} className="text-white" size={18} />
-        </div>
+        </DlUiButton>
       </div>
 
       <div className="flex gap-10 mt-10">
-        <DlUiIcon
-          lucideIcon={Linkedin}
-          className={
-            theme === "light" ? "text-v1-primary-600" : "text-v1-primary-400"
+        <a
+          href="https://www.linkedin.com/in/dantelugo/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn de Dante Lugo"
+          onClick={() =>
+            trackLinkClick("https://www.linkedin.com/in/dantelugo/", "LinkedIn")
           }
-          size={32}
-          onClick={() => {
-            const url = "https://www.linkedin.com/in/dantelugo/";
-            trackLinkClick(url, "LinkedIn");
-            window.open(url, "_blank");
-          }}
-        />
-        <DlUiIcon
-          lucideIcon={Github}
-          className={
-            theme === "light" ? "text-v1-primary-600" : "text-v1-primary-400"
+        >
+          <DlUiIcon
+            lucideIcon={Linkedin}
+            className={
+              theme === "light" ? "text-v1-primary-600" : "text-v1-primary-400"
+            }
+            size={32}
+          />
+        </a>
+        <a
+          href="https://github.com/dantel8"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub de Dante Lugo"
+          onClick={() => trackLinkClick("https://github.com/dantel8", "GitHub")}
+        >
+          <DlUiIcon
+            lucideIcon={Github}
+            className={
+              theme === "light" ? "text-v1-primary-600" : "text-v1-primary-400"
+            }
+            size={32}
+          />
+        </a>
+        <a
+          href="mailto:dantelugo05060@gmail.com"
+          aria-label="Enviar email a Dante Lugo"
+          onClick={() =>
+            trackLinkClick("mailto:dantelugo05060@gmail.com", "Email")
           }
-          size={32}
-          onClick={() => {
-            const url = "https://github.com/dantel8";
-            trackLinkClick(url, "GitHub");
-            window.open(url, "_blank");
-          }}
-        />
-        <DlUiIcon
-          lucideIcon={Mail}
-          className={
-            theme === "light" ? "text-v1-primary-600" : "text-v1-primary-400"
-          }
-          size={32}
-          onClick={() => {
-            const url = "mailto:dantelugo05060@gmail.com";
-            trackLinkClick(url, "Email");
-            window.open(url, "_blank");
-          }}
-        />
+        >
+          <DlUiIcon
+            lucideIcon={Mail}
+            className={
+              theme === "light" ? "text-v1-primary-600" : "text-v1-primary-400"
+            }
+            size={32}
+          />
+        </a>
       </div>
 
       <div className="absolute bottom-8 left-[49.4%] max-md:left-[47%] transform -translate-x-1/2 animate-bounce">

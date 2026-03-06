@@ -5,6 +5,8 @@ const en = {
     contact: "Contact",
     skill: "Skills",
     projects: "Projects",
+    experience: "Experience",
+    certifications: "Certifications",
     title: "Portfolio",
   },
   home: {
@@ -64,6 +66,7 @@ const en = {
     messageSent: "Your message has been sent successfully!",
     messageError: "There was an error sending your message. Please try again.",
     fillAllFields: "Please fill in all fields.",
+    invalidEmail: "Please enter a valid email.",
     contactInfo: "Contact Information",
     phone: "Phone",
     address: "Address",

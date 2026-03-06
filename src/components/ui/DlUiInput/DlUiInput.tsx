@@ -70,9 +70,12 @@ const DlUiInput = ({
           />
         )}
         <InputText
+          {...props}
+          id={props.id || props.name}
           type={props.type}
           name={props.name}
           placeholder={props.placeholder}
+          required={props.required}
           value={value}
           onKeyDown={props.onKeyDown}
           onFocus={props.onFocus}

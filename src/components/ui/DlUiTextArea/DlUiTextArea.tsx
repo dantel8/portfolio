@@ -1,30 +1,7 @@
 import { helpers } from "@/utils/helpers";
 import { InputTextarea, InputTextareaProps } from "primereact/inputtextarea";
-import React from "react";
 import { DlUiIcon } from "../DlUiIcon";
 import { LucideProps } from "lucide-react";
-
-// Estilos CSS para el scrollbar personalizado
-const scrollbarStyles = `
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 8px;
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: #b0b0b0;
-    border-radius: 10px;
-    border: 2px solid white;
-    background-clip: padding-box;
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background-color: #888888;
-  }
-`;
 
 export type DlUiTextAreaProps = InputTextareaProps & {
   icon?: React.ElementType<LucideProps>;
@@ -48,17 +25,6 @@ const DlUiTextArea = ({
   classNames,
   ...props
 }: DlUiTextAreaProps) => {
-  // Insertar los estilos CSS en el DOM
-  React.useEffect(() => {
-    const styleEl = document.createElement("style");
-    styleEl.textContent = scrollbarStyles;
-    document.head.appendChild(styleEl);
-
-    return () => {
-      document.head.removeChild(styleEl);
-    };
-  }, []);
-
   return (
     <div
       className={helpers.cn(
@@ -117,6 +83,7 @@ const DlUiTextArea = ({
         {/* Textarea */}
         <InputTextarea
           {...props}
+          id={props.id || props.name}
           value={value}
           onChange={onChange}
           className={helpers.cn(

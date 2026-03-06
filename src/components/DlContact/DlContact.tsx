@@ -8,7 +8,7 @@ import { DlUiIcon } from "@/components/ui/DlUiIcon";
 import { DlUiTextArea } from "@/components/ui/DlUiTextArea";
 import { useContactForm } from "@/hooks/useContactForm";
 import { useNotification } from "@/hooks/useNotification";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Mail, MapPin, Phone, Briefcase, LucideIcon, Copy } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
 
@@ -71,6 +71,8 @@ const ContactInfoItem = ({
       </div>
       {copyable && (
         <button
+          type="button"
+          aria-label={`Copiar ${label}`}
           onClick={handleCopy}
           className={`ml-auto p-2 rounded-full ${
             theme === "light"
@@ -92,6 +94,7 @@ const DlContact = () => {
   const { t } = useTranslation("contact");
   const { theme } = useTheme();
   const notify = useNotification();
+  const [formError, setFormError] = useState("");
 
   const { formData, loading, status, handleChange, handleSubmit } =
     useContactForm();
@@ -106,9 +109,14 @@ const DlContact = () => {
   }, [status, notify, t]);
 
   const onSubmit = async (e: React.FormEvent) => {
+    setFormError("");
     const result = await handleSubmit(e);
     if (!result.success && result.error === "missing_fields") {
-      alert(t("fillAllFields"));
+      setFormError(t("fillAllFields"));
+      return;
+    }
+    if (!result.success && result.error === "invalid_email") {
+      setFormError(t("invalidEmail"));
     }
   };
 
@@ -130,12 +138,23 @@ const DlContact = () => {
         >
           {t("contact")}
         </DlUiText>
-        <form onSubmit={onSubmit} className="flex flex-col gap-4 px-3">
+        <form onSubmit={onSubmit} className="flex flex-col gap-4 px-3" noValidate>
+          <input
+            type="text"
+            name="company"
+            value={formData.company}
+            onChange={handleChange}
+            className="hidden"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+          />
           <DlUiInput
             name="name"
             label={t("name")}
             value={formData.name}
             onChange={handleChange}
+            autoComplete="name"
             required
             className="bg-transparent"
             classNames={{
@@ -154,6 +173,7 @@ const DlContact = () => {
             type="email"
             value={formData.email}
             onChange={handleChange}
+            autoComplete="email"
             required
             className="bg-transparent"
             classNames={{
@@ -171,6 +191,7 @@ const DlContact = () => {
             label={t("message")}
             value={formData.message}
             onChange={handleChange}
+            autoComplete="off"
             required
             className="bg-transparent"
             classNames={{
@@ -183,6 +204,14 @@ const DlContact = () => {
                 theme === "light" ? "text-neutral-700" : "text-neutral-300",
             }}
           />
+          {formError && (
+            <p
+              role="alert"
+              className={theme === "light" ? "text-red-600 text-sm" : "text-red-300 text-sm"}
+            >
+              {formError}
+            </p>
+          )}
 
           <DlUiButton
             type="submit"

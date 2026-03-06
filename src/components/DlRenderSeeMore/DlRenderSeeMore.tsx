@@ -103,15 +103,17 @@ const DlRenderSeeMore = ({
           </DlUiText>
         )}
         {shouldShowMore && (
-          <span
+          <button
+            type="button"
             className={helpers.cn(
-              "inline-block cursor-pointer px-2 font-medium text-v1-primary-500 hover:text-v1-primary-400 transition-colors",
+              "inline-block cursor-pointer px-2 font-medium text-v1-primary-500 hover:text-v1-primary-400 transition-colors bg-transparent border-0",
               pt?.content?.className
             )}
             onClick={handleToggleShowMore}
+            aria-expanded={showMore}
           >
             {showMore ? t("see_less") : t("see_more")}
-          </span>
+          </button>
         )}
       </div>
     </div>

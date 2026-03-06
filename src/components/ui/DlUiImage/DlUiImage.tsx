@@ -83,7 +83,6 @@ const DlUiImage = (props: DlUiImageProps) => {
         priority={priority}
         placeholder={placeholder}
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        quality={90}
         fill={shouldUseFill}
         {...(!shouldUseFill && { width: finalWidth, height: finalHeight })}
       />

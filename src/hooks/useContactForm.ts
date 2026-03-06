@@ -5,6 +5,7 @@ interface ContactFormData {
   name: string;
   email: string;
   message: string;
+  company: string;
 }
 
 interface UseContactFormProps {
@@ -17,6 +18,7 @@ export const useContactForm = ({ onSuccess, onError }: UseContactFormProps = {})
     name: "",
     email: "",
     message: "",
+    company: "",
   });
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
@@ -39,15 +41,28 @@ export const useContactForm = ({ onSuccess, onError }: UseContactFormProps = {})
   };
 
   const resetForm = () => {
-    setFormData({ name: "", email: "", message: "" });
+    setFormData({ name: "", email: "", message: "", company: "" });
   };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const { name, email, message } = formData;
+    const { name, email, message, company } = formData;
+    const trimmedName = name.trim();
+    const trimmedEmail = email.trim();
+    const trimmedMessage = message.trim();
 
-    if (!name || !email || !message) {
+    if (!trimmedName || !trimmedEmail || !trimmedMessage) {
       return { success: false, error: "missing_fields" };
+    }
+
+    const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail);
+    if (!isValidEmail) {
+      return { success: false, error: "invalid_email" };
+    }
+
+    // Honeypot anti-spam: si el bot completa este campo oculto, ignoramos el envío.
+    if (company.trim()) {
+      return { success: true, ignored: true };
     }
 
     if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
@@ -63,12 +78,12 @@ export const useContactForm = ({ onSuccess, onError }: UseContactFormProps = {})
      try {
        
        await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
-         from_name: name,
-         reply_to: email,
-         email: email,
-         message: message,
+         from_name: trimmedName,
+         reply_to: trimmedEmail,
+         email: trimmedEmail,
+         message: trimmedMessage,
          to_name: "Dante Lugo",
-         to_email: "dantelugo05060@gmail.com",
+         to_email: "dantelugo050602@gmail.com",
        });
 
       setStatus("success");

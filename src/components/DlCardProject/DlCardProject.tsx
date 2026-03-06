@@ -74,12 +74,14 @@ const DlCardProject = (props: DlCardProjectProps) => {
           },
         }}
       />
-      <DlUiButton
-        label={t("view_project")}
-        onClick={() => window.open(props.link, "_blank")}
-        variant="outlined"
-        className={theme === "light" ? "text-neutral-600" : "text-neutral-300"}
-      />
+      <a href={props.link} target="_blank" rel="noopener noreferrer">
+        <DlUiButton
+          label={t("view_project")}
+          type="button"
+          variant="outlined"
+          className={theme === "light" ? "text-neutral-600" : "text-neutral-300"}
+        />
+      </a>
     </div>
   );
 };

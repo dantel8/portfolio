@@ -14,12 +14,20 @@ import { useTheme } from "@/context/ThemeContext";
 const getMenuItems = (t: (key: string) => string) => [
   {
     label: t("home"),
-    href: "/",
-  } /* 
+    href: "#home",
+  },
   {
     label: t("projects"),
-    href: "#about",
-  }, */,
+    href: "#projects",
+  },
+  {
+    label: t("experience"),
+    href: "#experience",
+  },
+  {
+    label: t("certifications"),
+    href: "#certifications",
+  },
   {
     label: t("skill"),
     href: "#skills",
@@ -70,6 +78,10 @@ const DlHeader = () => {
           </DlUiText>
           <div className="flex gap-2">
             <button
+              type="button"
+              aria-label={
+                i18n.language === "en" ? "Switch language" : "Cambiar idioma"
+              }
               className="p-2 rounded-lg hover:bg-v1-primary-300/30 transition-all duration-300"
               onClick={handleChangeLanguage}
             >
@@ -81,6 +93,12 @@ const DlHeader = () => {
               />
             </button>
             <button
+              type="button"
+              aria-label={
+                theme === "light"
+                  ? "Activar modo oscuro"
+                  : "Activar modo claro"
+              }
               className="p-2 rounded-lg hover:bg-v1-primary-300/30 transition-all duration-300"
               onClick={toggleTheme}
             >
@@ -93,10 +111,15 @@ const DlHeader = () => {
                 }
               />
             </button>
-            <button className="p-2 rounded-lg hover:bg-v1-primary-300/30 transition-all duration-300">
+            <button
+              type="button"
+              aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
+              aria-expanded={isOpen}
+              className="p-2 rounded-lg hover:bg-v1-primary-300/30 transition-all duration-300"
+              onClick={() => setIsOpen(!isOpen)}
+            >
               <DlUiIcon
                 lucideIcon={isOpen ? X : Menu}
-                onClick={() => setIsOpen(!isOpen)}
                 className={
                   theme === "light"
                     ? "text-v1-neutral-700"

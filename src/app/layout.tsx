@@ -6,8 +6,32 @@ import { NotificationProvider } from "@/context/NotificationContext";
 import GoogleAnalytics from "./GoogleAnalytics";
 
 export const metadata: Metadata = {
-  title: "Porfolio - Dante Lugo",
-  description: "Portfolio de Dante Lugo - Desarrollador Frontend",
+  metadataBase: new URL("https://dantelugo.dev"),
+  title: "Portfolio - Dante Lugo",
+  description:
+    "Portfolio de Dante Lugo, desarrollador frontend especializado en React, TypeScript y Next.js.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Portfolio - Dante Lugo",
+    description:
+      "Proyectos, experiencia y certificaciones de Dante Lugo, Frontend Developer.",
+    url: "https://dantelugo.dev",
+    siteName: "Portfolio Dante Lugo",
+    locale: "es_AR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Portfolio - Dante Lugo",
+    description:
+      "Proyectos, experiencia y certificaciones de Dante Lugo, Frontend Developer.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   icons: {
     icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
   },
@@ -19,7 +43,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body className="transition-colors duration-300">
         <GoogleAnalytics measurementId="G-DQRPDKC078" />
         <ThemeProvider>

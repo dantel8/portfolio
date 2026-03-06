@@ -9,7 +9,10 @@ const DlProjects = () => {
   const { t } = useTranslation("projects");
   const { theme } = useTheme();
   return (
-    <div className="flex flex-col gap-4 md:container md:mx-auto px-4 max-md:mx-2 mb-10">
+    <section
+      id="projects"
+      className="flex flex-col gap-4 md:container md:mx-auto px-4 max-md:mx-2 mb-10"
+    >
       <DlUiText
         type="h3"
         className={`relative my-6 text-center ${
@@ -32,7 +35,7 @@ const DlProjects = () => {
           link="/"
         /> */}
       </div>
-    </div>
+    </section>
   );
 };
 

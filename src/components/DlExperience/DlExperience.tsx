@@ -9,7 +9,7 @@ const DlExperience = () => {
     const { theme } = useTheme();
 
     return (
-        <>
+        <section id="experience">
             <DlUiText
             type="h3"
             className={`relative my-6 text-center ${theme === "light" ? "text-v1-primary-600" : "text-v1-primary-400"}`}>
@@ -120,7 +120,7 @@ const DlExperience = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </section>
     );
 }
 

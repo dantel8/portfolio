@@ -81,7 +81,7 @@ const DlCertifications = () => {
 
   return (
     <>
-      <div className="flex flex-col gap-8">
+      <section id="certifications" className="flex flex-col gap-8">
         <DlUiText
           type="h3"
           className={`relative text-center ${
@@ -103,7 +103,7 @@ const DlCertifications = () => {
           options={OPTIONS}
           showControls
         />
-      </div>
+      </section>
 
       {openCard && (
         <DlDialogCertificate
