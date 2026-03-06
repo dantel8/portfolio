@@ -8,11 +8,13 @@ import { useTheme } from "@/context/ThemeContext";
 import { DlUiImage } from "@/components/ui/DlUiImage";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { DlRenderSeeMore } from "@/components/DlRenderSeeMore";
+import { useDownloadCV } from "@/hooks/useDownloadCV";
 
 const DlHero = () => {
   const { t } = useTranslation("home");
   const { theme } = useTheme();
-  const { trackDownloadCV, trackLinkClick } = useAnalytics();
+  const { trackLinkClick } = useAnalytics();
+  const { downloadCV } = useDownloadCV();
   return (
     <div
       className="flex flex-col items-center gap-4 min-h-screen relative py-20 md:py-20"
@@ -66,10 +68,9 @@ const DlHero = () => {
         <div
           className="bg-v1-primary-500 text-white p-3 rounded-lg flex items-center gap-2 text-center justify-around font-semibold cursor-pointer"
           onClick={() => {
-            trackDownloadCV();
-            window.open(
-              "/assets/pdf/DanteLugoFullStack.pdf",
-              "_blank"
+            downloadCV(
+              "/assets/pdf/DanteLugoFrontendCV.pdf",
+              "DanteLugoFrontendCV.pdf"
             );
           }}
         >

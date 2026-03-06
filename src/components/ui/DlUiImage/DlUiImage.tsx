@@ -1,7 +1,7 @@
 "use client";
 
 import Image, { ImageProps as NextImageProps } from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { helpers } from "@/utils/helpers";
 
 export interface DlUiImageProps extends Omit<NextImageProps, "src" | "alt"> {
@@ -34,6 +34,11 @@ const DlUiImage = (props: DlUiImageProps) => {
 
   const [imgSrc, setImgSrc] = useState(props.src);
   const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setImgSrc(props.src);
+    setIsLoading(true);
+  }, [props.src]);
 
   const hasExplicitDimensions = Boolean(width && height);
   const hasContainerDimensions = Boolean(
