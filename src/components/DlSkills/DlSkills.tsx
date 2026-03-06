@@ -5,6 +5,7 @@ import { DlUiCarruselAutoScroll } from "@/components/ui/DlUiCarruselAutoScroll";
 import { EmblaOptionsType } from "embla-carousel";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@/context/ThemeContext";
+import { motion, useReducedMotion } from "framer-motion";
 
 const OPTIONS: EmblaOptionsType = {
   loop: true,
@@ -79,8 +80,17 @@ const skills = [
 const DlSkills = () => {
   const { t } = useTranslation("skills");
   const { theme } = useTheme();
+  const prefersReducedMotion = useReducedMotion();
+
   return (
-    <div id="skills" className="flex flex-col justify-center gap-8">
+    <motion.section
+      id="skills"
+      className="flex flex-col justify-center gap-8"
+      initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
+      whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      viewport={{ once: true, amount: 0.2 }}
+    >
       <DlUiText
         type="h3"
         className={`relative mt-10 text-center ${
@@ -96,7 +106,7 @@ const DlSkills = () => {
           imgClassName="w-12 h-12"
         />
       </div>
-    </div>
+    </motion.section>
   );
 };
 

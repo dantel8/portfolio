@@ -11,6 +11,7 @@ import { useNotification } from "@/hooks/useNotification";
 import { useEffect, useState } from "react";
 import { Mail, MapPin, Phone, Briefcase, LucideIcon, Copy } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
+import { motion, useReducedMotion } from "framer-motion";
 
 interface ContactInfoItemProps {
   icon: LucideIcon;
@@ -94,6 +95,7 @@ const DlContact = () => {
   const { t } = useTranslation("contact");
   const { theme } = useTheme();
   const notify = useNotification();
+  const prefersReducedMotion = useReducedMotion();
   const [formError, setFormError] = useState("");
 
   const { formData, loading, status, handleChange, handleSubmit } =
@@ -121,9 +123,13 @@ const DlContact = () => {
   };
 
   return (
-    <div
+    <motion.section
       id="contact"
       className="flex max-md:flex-col max-md:gap-10 gap-4 justify-center items-center w-full"
+      initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
+      whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      viewport={{ once: true, amount: 0.2 }}
     >
       <div
         className={`backdrop-blur-sm rounded-xl p-4 w-1/2 max-md:w-[100vw] max-md:p-0 ${
@@ -268,7 +274,7 @@ const DlContact = () => {
           value={t("hours")}
         />
       </div>
-    </div>
+    </motion.section>
   );
 };
 

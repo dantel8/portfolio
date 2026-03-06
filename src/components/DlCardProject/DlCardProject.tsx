@@ -7,6 +7,7 @@ import { DlRenderSeeMore } from "@/components/DlRenderSeeMore";
 import { getScreenshotUrl, ScreenshotService } from "@/utils/screenshotService";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@/context/ThemeContext";
+import { motion, useReducedMotion } from "framer-motion";
 
 interface DlCardProjectProps {
   image?: string;
@@ -20,6 +21,7 @@ interface DlCardProjectProps {
 const DlCardProject = (props: DlCardProjectProps) => {
   const { t } = useTranslation("projects");
   const { theme } = useTheme();
+  const prefersReducedMotion = useReducedMotion();
 
   // Generar URL de preview automático si está habilitado
   const getPreviewImage = () => {
@@ -37,12 +39,16 @@ const DlCardProject = (props: DlCardProjectProps) => {
   };
 
   return (
-    <div
+    <motion.article
       className={`flex flex-col gap-2 p-4 w-[600px] rounded-lg shadow-lg hover:shadow-xl transition-all ${
         theme === "light"
           ? "bg-white shadow-neutral-200 hover:shadow-neutral-300"
           : "bg-neutral-900 shadow-neutral-950 hover:shadow-black"
       }`}
+      whileHover={
+        prefersReducedMotion ? undefined : { y: -6, scale: 1.01 }
+      }
+      transition={{ duration: 0.25, ease: "easeOut" }}
     >
       <div
         className={`relative w-full overflow-hidden rounded-lg ${
@@ -82,7 +88,7 @@ const DlCardProject = (props: DlCardProjectProps) => {
           className={theme === "light" ? "text-neutral-600" : "text-neutral-300"}
         />
       </a>
-    </div>
+    </motion.article>
   );
 };
 

@@ -8,6 +8,7 @@ import { DlCertificationCard } from "@/components/DlCertificationCard";
 import { DlDialogCertificate } from "@/components/DlDialogCertificate";
 import { useState } from "react";
 import { useTheme } from "@/context/ThemeContext";
+import { motion, useReducedMotion } from "framer-motion";
 
 const certifications = [
   {
@@ -67,6 +68,7 @@ const OPTIONS: EmblaOptionsType = {
 const DlCertifications = () => {
   const { t } = useTranslation("certifications");
   const { theme } = useTheme();
+  const prefersReducedMotion = useReducedMotion();
   const [openCard, setOpenCard] = useState(false);
   const [selectedCert, setSelectedCert] = useState({
     image: "",
@@ -81,7 +83,14 @@ const DlCertifications = () => {
 
   return (
     <>
-      <section id="certifications" className="flex flex-col gap-8">
+      <motion.section
+        id="certifications"
+        className="flex flex-col gap-8"
+        initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
+        whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        viewport={{ once: true, amount: 0.2 }}
+      >
         <DlUiText
           type="h3"
           className={`relative text-center ${
@@ -103,7 +112,7 @@ const DlCertifications = () => {
           options={OPTIONS}
           showControls
         />
-      </section>
+      </motion.section>
 
       {openCard && (
         <DlDialogCertificate

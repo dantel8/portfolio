@@ -3,13 +3,21 @@ import { DlUiText } from "@/components/ui/DlUiText";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@/context/ThemeContext";
+import { motion, useReducedMotion } from "framer-motion";
 
 const DlExperience = () => {
     const { t } = useTranslation("experience");
     const { theme } = useTheme();
+    const prefersReducedMotion = useReducedMotion();
 
     return (
-        <section id="experience">
+        <motion.section
+            id="experience"
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
+            whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.2 }}
+        >
             <DlUiText
             type="h3"
             className={`relative my-6 text-center ${theme === "light" ? "text-v1-primary-600" : "text-v1-primary-400"}`}>
@@ -120,7 +128,7 @@ const DlExperience = () => {
                     </div>
                 </div>
             </div>
-        </section>
+        </motion.section>
     );
 }
 
