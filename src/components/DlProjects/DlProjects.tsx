@@ -31,9 +31,9 @@ const DlProjects = () => {
       <div className="flex gap-4 justify-evenly flex-wrap">
         <DlCardProject
           useAutoPreview
-          title="Notes App"
-          description={t("description_notes_app")}
-          link="https://notes-app-lugo.onrender.com/"
+          title="ShiftYa"
+          description={t("Landing Page para ShiftYa")}
+          link="https://shiftya.online/"
         />
         {/* <DlCardProject
           useAutoPreview
