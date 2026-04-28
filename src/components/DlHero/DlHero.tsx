@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { useDownloadCV } from "@/hooks/useDownloadCV";
 import { motion, useReducedMotion } from "framer-motion";
+import { DlRenderSeeMore } from "@/components/DlRenderSeeMore";
 
 const DlHero = () => {
   const { t } = useTranslation("home");
@@ -70,11 +71,25 @@ const DlHero = () => {
           </motion.div>
 
           <motion.div {...itemMotion} className="max-w-xl lg:pb-6">
-            <p className="max-w-[34rem] text-sm leading-6 text-[#f4f0e8]/82 md:text-base">
+            {/* Versión mobile con "Leer más" */}
+            <div className="md:hidden">
+              <DlRenderSeeMore
+                content={t("description")}
+                maxWords={25}
+                maxHeight={80}
+                namespace="home"
+                pt={{
+                  content: { className: "text-sm leading-6 text-[#f4f0e8]/82" }
+                }}
+              />
+            </div>
+
+            {/* Versión desktop completa */}
+            <p className="hidden max-w-[34rem] text-sm leading-6 text-[#f4f0e8]/82 md:block md:text-base">
               {t("description")}
             </p>
 
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <div className="mt-4 flex flex-col gap-3 sm:mt-6 sm:flex-row sm:flex-wrap">
               <a
                 href="#projects"
                 className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-v1-primary-500 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-v1-primary-600 sm:w-auto"
