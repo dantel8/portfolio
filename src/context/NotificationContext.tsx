@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, createContext, useCallback, useContext, useState } from "react";
+import { ReactNode, createContext, useCallback, useContext, useMemo, useState } from "react";
 import DlNotificationCenter from "@/components/ui/DlNotification/DlNotificationCenter";
 
 export type NotificationType = "success" | "error" | "info" | "warn";
@@ -27,10 +27,6 @@ const NotificationContext = createContext<NotificationContextValue | undefined>(
 export const NotificationProvider = ({ children }: { children: ReactNode }) => {
   const [notifications, setNotifications] = useState<AppNotification[]>([]);
 
-  const remove = useCallback((id: string) => {
-    setNotifications((prev) => prev.filter((item) => item.id !== id));
-  }, []);
-
   const notify = useCallback(
     ({ message, type = "info", duration = 3200 }: NotifyOptions) => {
       const id =
@@ -41,16 +37,22 @@ export const NotificationProvider = ({ children }: { children: ReactNode }) => {
       setNotifications((prev) => [...prev, { id, message, type, duration }]);
 
       if (duration > 0) {
-        setTimeout(() => remove(id), duration);
+        setTimeout(() => {
+          setNotifications((prev) => prev.filter((item) => item.id !== id));
+        }, duration);
       }
     },
-    [remove]
+    []
   );
 
+  const value = useMemo(() => ({ notify }), [notify]);
+
   return (
-    <NotificationContext.Provider value={{ notify }}>
+    <NotificationContext.Provider value={value}>
       {children}
-      <DlNotificationCenter notifications={notifications} onDismiss={remove} />
+      <DlNotificationCenter notifications={notifications} onDismiss={(id) => {
+        setNotifications((prev) => prev.filter((item) => item.id !== id));
+      }} />
     </NotificationContext.Provider>
   );
 };

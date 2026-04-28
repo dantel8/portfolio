@@ -83,16 +83,18 @@ const DlContact = () => {
   const prefersReducedMotion = useReducedMotion();
   const [formError, setFormError] = useState("");
 
-  const { formData, loading, status, handleChange, handleSubmit } = useContactForm();
+  const { formData, loading, status, handleChange, handleSubmit, resetStatus } = useContactForm();
 
   useEffect(() => {
     if (status === "success") {
       notify({ message: t("messageSent"), type: "success" });
-      trackContactFormSubmit();
+      trackContactFormSubmit?.();
+      resetStatus?.();
     } else if (status === "error") {
       notify({ message: t("messageError"), type: "error" });
+      resetStatus?.();
     }
-  }, [status, notify, t, trackContactFormSubmit]);
+  }, [status]);
 
   const onSubmit = async (e: React.FormEvent) => {
     setFormError("");

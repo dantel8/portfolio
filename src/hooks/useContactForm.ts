@@ -107,5 +107,6 @@ export const useContactForm = ({ onSuccess, onError }: UseContactFormProps = {})
     handleChange,
     handleSubmit,
     resetForm,
+    resetStatus: () => setStatus("idle"),
   };
 };
