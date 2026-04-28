@@ -5,12 +5,26 @@
 :root {
   --background-color: #fffdf4;
   --text-color: #333333;
+  --surface-color: rgba(255, 255, 255, 0.82);
+  --surface-border: rgba(17, 24, 39, 0.08);
+  --surface-strong: #f6f2e7;
+  --menu-bg: rgba(255, 253, 244, 0.94);
+  --menu-shadow: rgba(15, 23, 42, 0.12);
+  --menu-active: #2a9425;
+  --menu-inactive: #6d6d6d;
   scroll-behavior: smooth;
 }
 
 html.dark body {
   --background-color: #1e1e1e;
   --text-color: #f5f5f5;
+  --surface-color: rgba(24, 24, 27, 0.82);
+  --surface-border: rgba(255, 255, 255, 0.08);
+  --surface-strong: #27272a;
+  --menu-bg: rgba(24, 24, 27, 0.94);
+  --menu-shadow: rgba(0, 0, 0, 0.35);
+  --menu-active: #60ce5a;
+  --menu-inactive: #b0b0b0;
   background-color: var(--background-color);
   color: var(--text-color);
 }
@@ -21,6 +35,18 @@ html.light body {
   --text-color: #333333;
   background-color: var(--background-color);
   color: var(--text-color);
+}
+
+body {
+  font-family: var(--font-nunito), sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-anton), sans-serif;
+}
+
+.font-mono-ui {
+  font-family: var(--font-geist-mono), monospace;
 }
 
 @layer base {
@@ -50,6 +76,85 @@ html.light body {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(8.3px);
   -webkit-backdrop-filter: blur(8.3px);
+}
+
+.noise-overlay {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.18) 0.8px, transparent 0.8px);
+  background-size: 12px 12px;
+}
+
+.menu {
+  position: fixed;
+  left: 50%;
+  bottom: max(0.75rem, env(safe-area-inset-bottom));
+  z-index: 120;
+  display: flex;
+  align-items: stretch;
+  gap: 0.35rem;
+  width: min(calc(100vw - 1rem), 38rem);
+  transform: translate3d(-50%, 0, 0);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  isolation: isolate;
+  border: 1px solid var(--surface-border);
+  border-radius: 999px;
+  padding: 0.4rem;
+  background: var(--menu-bg);
+  box-shadow: 0 18px 45px -24px var(--menu-shadow);
+}
+
+.menu__item {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  border-radius: 999px;
+  padding: 0.55rem 0.25rem;
+  color: var(--menu-inactive);
+  transition: 180ms ease;
+}
+
+.menu__item.active {
+  background: rgba(57, 179, 52, 0.12);
+  color: var(--menu-active);
+}
+
+.menu__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu__text {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 420px) {
+  .menu {
+    width: calc(100vw - 0.75rem);
+    gap: 0.15rem;
+    padding: 0.35rem;
+  }
+
+  .menu__item {
+    padding: 0.5rem 0.1rem;
+  }
+
+  .menu__text {
+    font-size: 0.5rem;
+    letter-spacing: 0.02em;
+  }
 }
 
 .custom-scrollbar::-webkit-scrollbar {

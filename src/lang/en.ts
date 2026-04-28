@@ -12,7 +12,7 @@ const en = {
   home: {
     name: "Dante Lugo",
     subtitle: "Frontend Developer",
-    description: "Hi, I'm Dante Lugo, a frontend developer specializing in React. I enjoy transforming requirements into usable products, prioritizing performance, accessibility, and code maintainability. I complement my daily practice with my academic training—a bachelor's degree in computer science (4th year)—to balance pragmatic solutions with theoretical foundations. In my projects, I often use TypeScript for robustness, TailwindCSS for prototyping speed and visual consistency, and quality tools (linters, tests, and CI) to sustain growth. I am motivated by collaborative teams, continuous improvement, and challenges where a good user experience has a direct impact on the business.",
+    description: "Hello, I’m Dante Lugo, a React front-end developer. I enjoy turning requirements into usable products, prioritizing performance, accessibility, and code maintainability. I complement my daily work with my academic background—I’m currently in my fourth year of a Bachelor’s degree in Computer Science. In my projects, I typically use TypeScript for robustness, TailwindCSS for rapid prototyping and visual consistency to support growth. I’m motivated by collaborative teams, continuous improvement, and challenges where a good user experience has a direct impact on the business.",
     viewProjects: "View my projects",
     downloadCV: "Download CV",
     see_more: "See more",
@@ -38,7 +38,8 @@ const en = {
     see_more: "See more",
     see_less: "See less",
     view_project: "View project",
-    description_notes_app: "A complete notes app with authentication and categories. Built with React, TypeScript and PostgreSQL.",
+    description_shiftya: "Conversion-focused landing page for custom software development services. In-house design and development.",
+    description_turnow: "Design and development of a landing page and a comprehensive appointment scheduling system, featuring online booking, automation, and a metrics dashboard",
   },
   skills: {
     skills: "Skills",
@@ -46,6 +47,17 @@ const en = {
   certifications: {
     certifications: "Certifications",
     duration: "Duration",
+    hours: "Hours",
+    graduationDate: "Graduation Date",
+    certificateLabel: "Certificate",
+    certificateAccessTitle: "Access certificate",
+    certificateAccessDescription:
+      "Copy or open the link to view the full certificate.",
+    copyLink: "Copy link",
+    openLink: "Open link",
+    close: "Close",
+    linkCopied: "Certificate link copied",
+    linkCopyError: "Unable to copy the certificate link",
     html: "Development Web with HTML",
     poo: "Programming Object Oriented",
     maquetador: "Advanced Web Designer",

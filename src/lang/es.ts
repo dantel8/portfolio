@@ -12,7 +12,7 @@ const es = {
   home: {
     name: "Dante Lugo",
     subtitle: "Desarrollador Frontend",
-    description: "Hola, soy Dante Lugo, desarrollador Frontend especializado en React. Disfruto transformar requerimientos en productos usables, priorizando rendimiento, accesibilidad y mantenibilidad del código. Complemento la práctica diaria con mi formación académica —Lic. en Sistemas (4º año)— para equilibrar soluciones pragmáticas con fundamentos teóricos. En mis proyectos suelo utilizar TypeScript para robustez, TailwindCSS para velocidad de prototipado y consistencia visual, y herramientas de calidad (linters, tests y CI) para sostener el crecimiento. Me motivan los equipos colaborativos, la mejora continua y los desafíos donde una buena experiencia de usuario tiene impacto directo en el negocio.",
+    description: "Hola, soy Dante Lugo, desarrollador Frontend React. Disfruto transformar requerimientos en productos usables, priorizando rendimiento, accesibilidad y mantenibilidad del código. Complemento la práctica diaria con mi formación académica —Lic. en Sistemas (4º año). En mis proyectos suelo utilizar TypeScript para robustez, TailwindCSS para velocidad de prototipado y consistencia visual para sostener el crecimiento. Me motivan los equipos colaborativos, la mejora continua y los desafíos donde una buena experiencia de usuario tiene impacto directo en el negocio.",
     viewProjects: "Ver proyectos",
     downloadCV: "Descargar CV",
     see_more: "Ver más",
@@ -38,7 +38,8 @@ const es = {
     see_more: "Ver más",
     see_less: "Ver menos",
     view_project: "Ver proyecto",
-    description_notes_app: "Una aplicación de notas completa con autenticación y categorías. Construida con React, TypeScript y PostgreSQL.",
+    description_shiftya: "Landing page orientada a conversión para servicios de desarrollo de software personalizado. Diseño y desarrollo propio.",
+    description_turnow: "Diseño y desarrollo de landing page y sistema completo de gestión de turnos, con reservas online, automatización y panel de métricas.",
   },
   skills: {
     skills: "Habilidades",
@@ -46,6 +47,17 @@ const es = {
   certifications: {
     certifications: "Certificaciones",
     duration: "Duracion",
+    hours: "Horas",
+    graduationDate: "Fecha de egreso",
+    certificateLabel: "Certificado",
+    certificateAccessTitle: "Acceder al certificado",
+    certificateAccessDescription:
+      "Copia o abre el link para ver el certificado completo.",
+    copyLink: "Copiar link",
+    openLink: "Abrir link",
+    close: "Cerrar",
+    linkCopied: "Link del certificado copiado",
+    linkCopyError: "No se pudo copiar el link del certificado",
     html: "Desarrollo Web con HTML",
     poo: "Programación Orientada a Objetos",
     maquetador: "Maquetador Web Avanzado",

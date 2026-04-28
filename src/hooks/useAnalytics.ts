@@ -34,10 +34,64 @@ export const useAnalytics = () => {
     });
   };
 
+  const trackMenuClick = (section: string) => {
+    trackEvent({
+      action: 'menu_click',
+      category: 'navigation',
+      label: section,
+    });
+  };
+
+  const trackLanguageChange = (newLanguage: string) => {
+    trackEvent({
+      action: 'language_changed',
+      category: 'user_preference',
+      label: newLanguage,
+    });
+  };
+
+  const trackThemeChange = (newTheme: string) => {
+    trackEvent({
+      action: 'theme_changed',
+      category: 'user_preference',
+      label: newTheme,
+    });
+  };
+
+  const trackCertificateOpened = (certificateTitle: string) => {
+    trackEvent({
+      action: 'certificate_opened',
+      category: 'engagement',
+      label: certificateTitle,
+    });
+  };
+
+  const trackProjectViewed = (projectName: string) => {
+    trackEvent({
+      action: 'project_viewed',
+      category: 'engagement',
+      label: projectName,
+    });
+  };
+
+  const trackContactFormSubmit = () => {
+    trackEvent({
+      action: 'contact_form_submit',
+      category: 'conversion',
+      label: 'Contact Form',
+    });
+  };
+
   return {
     trackEvent,
     trackDownloadCV,
     trackLinkClick,
+    trackMenuClick,
+    trackLanguageChange,
+    trackThemeChange,
+    trackCertificateOpened,
+    trackProjectViewed,
+    trackContactFormSubmit,
   };
 };
 

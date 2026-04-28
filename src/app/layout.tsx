@@ -1,9 +1,26 @@
 import type { Metadata } from "next";
+import { Anton, Geist_Mono, Nunito } from "next/font/google";
 import "./globals.css";
 import I18nProvider from "./i18n-provider";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { NotificationProvider } from "@/context/NotificationContext";
 import GoogleAnalytics from "./GoogleAnalytics";
+
+const anton = Anton({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-anton",
+});
+
+const nunito = Nunito({
+  subsets: ["latin"],
+  variable: "--font-nunito",
+});
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://dantelugo.dev"),
@@ -44,7 +61,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className="transition-colors duration-300">
+      <body
+        className={`${anton.variable} ${nunito.variable} ${geistMono.variable} font-sans transition-colors duration-300`}
+      >
         <GoogleAnalytics measurementId="G-DQRPDKC078" />
         <ThemeProvider>
           <NotificationProvider>

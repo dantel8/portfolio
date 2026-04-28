@@ -1,17 +1,13 @@
 "use client";
 
-import { DlUiText } from "@/components/ui/DlUiText";
-import { DlUiInput } from "@/components/ui/DlUiInput";
 import { useTranslation } from "react-i18next";
-import { DlUiButton } from "@/components/ui/DlUiButton";
-import { DlUiIcon } from "@/components/ui/DlUiIcon";
-import { DlUiTextArea } from "@/components/ui/DlUiTextArea";
 import { useContactForm } from "@/hooks/useContactForm";
 import { useNotification } from "@/hooks/useNotification";
 import { useEffect, useState } from "react";
-import { Mail, MapPin, Phone, Briefcase, LucideIcon, Copy } from "lucide-react";
+import { Mail, MapPin, Phone, Briefcase, LucideIcon, Copy, Plus } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
 import { motion, useReducedMotion } from "framer-motion";
+import { useAnalytics } from "@/hooks/useAnalytics";
 
 interface ContactInfoItemProps {
   icon: LucideIcon;
@@ -43,30 +39,21 @@ const ContactInfoItem = ({
   };
 
   return (
-    <div className="flex items-center gap-2">
-      <DlUiIcon
-        lucideIcon={Icon}
-        className={`rounded-full p-2 ${
+    <div className="flex items-center gap-3">
+      <span
+        className={`rounded-2xl p-3 ${
           theme === "light"
-            ? "text-v1-primary-600 bg-v1-primary-600/10"
-            : "text-v1-primary-400 bg-v1-primary-400/10"
+            ? "bg-v1-primary-600/10 text-v1-primary-600"
+            : "bg-v1-primary-400/10 text-v1-primary-400"
         }`}
-        size={32}
-      />
+      >
+        <Icon className="h-5 w-5" />
+      </span>
       <div>
-        <DlUiText
-          type="body1"
-          className={
-            theme === "light" ? "text-v1-primary-600" : "text-v1-primary-400"
-          }
-        >
+        <p className={theme === "light" ? "text-v1-primary-600" : "text-v1-primary-400"}>
           {label}
-        </DlUiText>
-        <span
-          className={
-            theme === "light" ? "text-neutral-700" : "text-neutral-300"
-          }
-        >
+        </p>
+        <span className={theme === "light" ? "text-neutral-700" : "text-neutral-300"}>
           {value}
         </span>
       </div>
@@ -75,16 +62,13 @@ const ContactInfoItem = ({
           type="button"
           aria-label={`Copiar ${label}`}
           onClick={handleCopy}
-          className={`ml-auto p-2 rounded-full ${
+          className={`ml-auto rounded-full p-2 ${
             theme === "light"
-              ? "text-v1-primary-600 bg-v1-primary-600/10"
-              : "text-v1-primary-400 bg-v1-primary-400/10"
+              ? "bg-v1-primary-600/10 text-v1-primary-600"
+              : "bg-v1-primary-400/10 text-v1-primary-400"
           }`}
         >
-          <DlUiIcon
-            lucideIcon={Copy}
-            size={20}
-          />
+          <Copy className="h-5 w-5" />
         </button>
       )}
     </div>
@@ -95,20 +79,20 @@ const DlContact = () => {
   const { t } = useTranslation("contact");
   const { theme } = useTheme();
   const notify = useNotification();
+  const { trackContactFormSubmit } = useAnalytics();
   const prefersReducedMotion = useReducedMotion();
   const [formError, setFormError] = useState("");
 
-  const { formData, loading, status, handleChange, handleSubmit } =
-    useContactForm();
+  const { formData, loading, status, handleChange, handleSubmit } = useContactForm();
 
-  // Notificar estados de envío con toasts globales
   useEffect(() => {
     if (status === "success") {
       notify({ message: t("messageSent"), type: "success" });
+      trackContactFormSubmit();
     } else if (status === "error") {
       notify({ message: t("messageError"), type: "error" });
     }
-  }, [status, notify, t]);
+  }, [status, notify, t, trackContactFormSubmit]);
 
   const onSubmit = async (e: React.FormEvent) => {
     setFormError("");
@@ -125,154 +109,179 @@ const DlContact = () => {
   return (
     <motion.section
       id="contact"
-      className="flex max-md:flex-col max-md:gap-10 gap-4 justify-center items-center w-full"
+      className="mx-auto w-full max-w-7xl px-4 py-20 md:px-6"
       initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
       whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       viewport={{ once: true, amount: 0.2 }}
     >
       <div
-        className={`backdrop-blur-sm rounded-xl p-4 w-1/2 max-md:w-[100vw] max-md:p-0 ${
-          theme === "light" ? "bg-[#fffdf4]/70" : "transparent"
+        className={`relative grid overflow-hidden rounded-[2rem] border md:grid-cols-2 lg:grid-cols-3 ${
+          theme === "light"
+            ? "border-black/5 bg-[var(--surface-color)]"
+            : "border-white/10 bg-[var(--surface-color)]"
         }`}
       >
-        <DlUiText
-          type="h3"
-          className={`relative mt-10 text-center ${
-            theme === "light" ? "text-v1-primary-600" : "text-v1-primary-400"
+        <Plus className="absolute -left-3 -top-3 h-6 w-6" />
+        <Plus className="absolute -right-3 -top-3 h-6 w-6" />
+        <Plus className="absolute -bottom-3 -left-3 h-6 w-6" />
+        <Plus className="absolute -bottom-3 -right-3 h-6 w-6" />
+
+        <div className="lg:col-span-2">
+          <div className="space-y-6 px-5 py-8 md:p-8">
+            <div className="space-y-3">
+              <p className="font-mono-ui text-xs uppercase tracking-[0.35em] text-v1-primary-500">
+                Contact
+              </p>
+              <h3
+                className={`text-4xl font-bold md:text-5xl ${
+                  theme === "light" ? "text-neutral-900" : "text-neutral-100"
+                }`}
+              >
+                {t("contact")}
+              </h3>
+              <p
+                className={`max-w-2xl text-sm leading-6 md:text-base ${
+                  theme === "light" ? "text-neutral-700" : "text-neutral-300"
+                }`}
+              >
+                Frontend engineering con foco en producto, performance y detalle visual. Si tenés una búsqueda abierta o un proyecto que necesita ritmo de entrega, escribime.
+              </p>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2">
+              <ContactInfoItem
+                icon={Mail}
+                label={t("email")}
+                value="dantelugo050602@gmail.com"
+                copyable
+                copyMessage={t("emailCopied")}
+                copyErrorMessage={t("emailCopyError")}
+              />
+              <ContactInfoItem icon={Phone} label={t("phone")} value="+54 9 11 3251 3611" />
+              <ContactInfoItem icon={MapPin} label={t("address")} value="Buenos Aires, Argentina" />
+              <ContactInfoItem icon={Briefcase} label={t("disponibility")} value={t("hours")} />
+            </div>
+          </div>
+        </div>
+
+        <div
+          className={`border-t p-5 md:border-l md:border-t-0 ${
+            theme === "light"
+              ? "border-black/5 bg-black/[0.03]"
+              : "border-white/10 bg-white/[0.03]"
           }`}
         >
-          {t("contact")}
-        </DlUiText>
-        <form onSubmit={onSubmit} className="flex flex-col gap-4 px-3" noValidate>
-          <input
-            type="text"
-            name="company"
-            value={formData.company}
-            onChange={handleChange}
-            className="hidden"
-            tabIndex={-1}
-            autoComplete="off"
-            aria-hidden="true"
-          />
-          <DlUiInput
-            name="name"
-            label={t("name")}
-            value={formData.name}
-            onChange={handleChange}
-            autoComplete="name"
-            required
-            className="bg-transparent"
-            classNames={{
-              input: `bg-transparent backdrop-blur-sm ${
-                theme === "light"
-                  ? "border-v1-primary-200 text-neutral-800"
-                  : "border-v1-primary-400 text-neutral-100"
-              }`,
-              label:
-                theme === "light" ? "text-neutral-700" : "text-neutral-300",
-            }}
-          />
-          <DlUiInput
-            name="email"
-            label={t("email")}
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            autoComplete="email"
-            required
-            className="bg-transparent"
-            classNames={{
-              input: `bg-transparent backdrop-blur-sm ${
-                theme === "light"
-                  ? "border-v1-primary-200 text-neutral-800"
-                  : "border-v1-primary-400 text-neutral-100"
-              }`,
-              label:
-                theme === "light" ? "text-neutral-700" : "text-neutral-300",
-            }}
-          />
-          <DlUiTextArea
-            name="message"
-            label={t("message")}
-            value={formData.message}
-            onChange={handleChange}
-            autoComplete="off"
-            required
-            className="bg-transparent"
-            classNames={{
-              input: `bg-transparent backdrop-blur-sm ${
-                theme === "light"
-                  ? "border-v1-primary-200 text-neutral-800"
-                  : "border-v1-primary-400 text-neutral-100"
-              }`,
-              label:
-                theme === "light" ? "text-neutral-700" : "text-neutral-300",
-            }}
-          />
-          {formError && (
-            <p
-              role="alert"
-              className={theme === "light" ? "text-red-600 text-sm" : "text-red-300 text-sm"}
+          <form onSubmit={onSubmit} className="space-y-4" noValidate>
+            <input
+              type="text"
+              name="company"
+              value={formData.company}
+              onChange={handleChange}
+              className="hidden"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+            />
+
+            <div className="flex flex-col gap-2">
+              <label
+                htmlFor="name"
+                className={
+                  theme === "light"
+                    ? "text-sm font-medium text-neutral-700"
+                    : "text-sm font-medium text-neutral-300"
+                }
+              >
+                {t("name")}
+              </label>
+              <input
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                autoComplete="name"
+                required
+                className={`h-11 rounded-xl border px-3 text-sm outline-none transition ${
+                  theme === "light"
+                    ? "border-black/10 bg-white text-neutral-800 focus:border-v1-primary-500"
+                    : "border-white/10 bg-neutral-900 text-neutral-100 focus:border-v1-primary-400"
+                }`}
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label
+                htmlFor="email"
+                className={
+                  theme === "light"
+                    ? "text-sm font-medium text-neutral-700"
+                    : "text-sm font-medium text-neutral-300"
+                }
+              >
+                {t("email")}
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                autoComplete="email"
+                required
+                className={`h-11 rounded-xl border px-3 text-sm outline-none transition ${
+                  theme === "light"
+                    ? "border-black/10 bg-white text-neutral-800 focus:border-v1-primary-500"
+                    : "border-white/10 bg-neutral-900 text-neutral-100 focus:border-v1-primary-400"
+                }`}
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label
+                htmlFor="message"
+                className={
+                  theme === "light"
+                    ? "text-sm font-medium text-neutral-700"
+                    : "text-sm font-medium text-neutral-300"
+                }
+              >
+                {t("message")}
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                autoComplete="off"
+                required
+                rows={5}
+                className={`min-h-[8rem] rounded-xl border px-3 py-2 text-sm outline-none transition ${
+                  theme === "light"
+                    ? "border-black/10 bg-white text-neutral-800 focus:border-v1-primary-500"
+                    : "border-white/10 bg-neutral-900 text-neutral-100 focus:border-v1-primary-400"
+                }`}
+              />
+            </div>
+
+            {formError && (
+              <p
+                role="alert"
+                className={theme === "light" ? "text-sm text-red-600" : "text-sm text-red-300"}
+              >
+                {formError}
+              </p>
+            )}
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full rounded-xl bg-v1-primary-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-v1-primary-600 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {formError}
-            </p>
-          )}
-
-          <DlUiButton
-            type="submit"
-            disabled={loading}
-            variant={theme === "light" ? "primary" : "secondary"}
-            className={
-              theme === "dark"
-                ? "!bg-v1-primary-600 hover:!bg-v1-primary-700"
-                : ""
-            }
-          >
-            {loading ? t("sending") : t("send")}
-          </DlUiButton>
-        </form>
-      </div>
-      <div
-        className={`flex flex-col gap-4 p-4 shadow-md rounded-xl h-full max-md:w-96 ${
-          theme === "light" ? "bg-white/70" : "bg-neutral-800/70"
-        }`}
-      >
-        <DlUiText
-          type="h3"
-          className={
-            theme === "light" ? "text-v1-primary-600" : "text-v1-primary-400"
-          }
-        >
-          {t("contactInfo")}
-        </DlUiText>
-
-        <ContactInfoItem
-          icon={Mail}
-          label={t("email")}
-          value="dantelugo050602@gmail.com"
-          copyable
-          copyMessage={t("emailCopied")}
-          copyErrorMessage={t("emailCopyError")}
-        />
-
-        <ContactInfoItem
-          icon={Phone}
-          label={t("phone")}
-          value="+54 9 11 3251 3611"
-        />
-
-        <ContactInfoItem
-          icon={MapPin}
-          label={t("address")}
-          value="Buenos Aires, Argentina"
-        />
-
-        <ContactInfoItem
-          icon={Briefcase}
-          label={t("disponibility")}
-          value={t("hours")}
-        />
+              {loading ? t("sending") : t("send")}
+            </button>
+          </form>
+        </div>
       </div>
     </motion.section>
   );
