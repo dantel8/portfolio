@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/utils/cn";
+import { useScrollDirection } from "@/hooks/useScrollDirection";
 import type { ElementType } from "react";
 import { useMemo, useState } from "react";
 
@@ -18,11 +19,23 @@ interface ModernMobileMenuProps {
 
 export default function ModernMobileMenu({ items }: ModernMobileMenuProps) {
   const [activeHref, setActiveHref] = useState(items[0]?.href ?? "#home");
+  const { isVisible } = useScrollDirection();
 
   const finalItems = useMemo(() => items, [items]);
 
   return (
-    <nav className="menu md:hidden" aria-label="Mobile navigation">
+    <nav 
+      className="menu md:hidden"
+      style={{
+        transition: 'transform 250ms ease-in-out, opacity 250ms ease-in-out',
+        transform: !isVisible 
+          ? 'translate3d(-50%, calc(100% + 20px), 0)' 
+          : 'translate3d(-50%, 0, 0)',
+        opacity: isVisible ? 1 : 0,
+        pointerEvents: isVisible ? 'auto' : 'none',
+      }}
+      aria-label="Mobile navigation"
+    >
       {finalItems.map((item) => {
         const Icon = item.icon;
         const isActive = activeHref === item.href;
