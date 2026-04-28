@@ -6,6 +6,7 @@ import { DlProjects } from "@/components/DlProjects";
 import { DlCertifications } from "@/components/DlCertifications";
 import { DlContact } from "@/components/DlContact";
 import { DlFooter } from "@/components/DlFooter";
+import { BGPattern } from "@/components/ui/bg-pattern";
 
 export default function Home() {
   return (
@@ -14,11 +15,16 @@ export default function Home() {
       <div className="relative">
         <main className="overflow-x-hidden pb-28 md:pb-0">
           <DlHero />
-          <DlSkills />
-          <DlExperience />
-          <DlProjects />
-          <DlCertifications />
-          <DlContact />
+          <div className="relative">
+            <BGPattern variant="grid" mask="fade-edges" size={40} fill="rgba(96, 206, 90, 0.1)" />
+            <div className="relative z-10">
+              <DlSkills />
+              <DlExperience />
+              <DlProjects />
+              <DlCertifications />
+              <DlContact />
+            </div>
+          </div>
         </main>
         <DlFooter />
       </div>

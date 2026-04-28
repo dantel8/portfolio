@@ -118,7 +118,7 @@ const DlContact = () => {
       viewport={{ once: true, amount: 0.2 }}
     >
       <div
-        className={`relative grid overflow-hidden rounded-[2rem] border md:grid-cols-2 lg:grid-cols-3 ${
+        className={`relative grid overflow-visible border md:grid-cols-2 lg:grid-cols-3 ${
           theme === "light"
             ? "border-black/5 bg-[var(--surface-color)]"
             : "border-white/10 bg-[var(--surface-color)]"
@@ -128,7 +128,7 @@ const DlContact = () => {
         <Plus className="absolute -right-3 -top-3 h-6 w-6" />
         <Plus className="absolute -bottom-3 -left-3 h-6 w-6" />
         <Plus className="absolute -bottom-3 -right-3 h-6 w-6" />
-
+        
         <div className="lg:col-span-2">
           <div className="space-y-6 px-5 py-8 md:p-8">
             <div className="space-y-3">
