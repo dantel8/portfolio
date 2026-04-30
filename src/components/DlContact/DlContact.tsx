@@ -8,6 +8,7 @@ import { Mail, MapPin, Phone, Briefcase, LucideIcon, Copy, Plus } from "lucide-r
 import { useTheme } from "@/context/ThemeContext";
 import { motion, useReducedMotion } from "framer-motion";
 import { useAnalytics } from "@/hooks/useAnalytics";
+import { useAvailabilitySchedule } from "@/hooks/useAvailabilitySchedule";
 
 interface ContactInfoItemProps {
   icon: LucideIcon;
@@ -82,6 +83,7 @@ const DlContact = () => {
   const { trackContactFormSubmit } = useAnalytics();
   const prefersReducedMotion = useReducedMotion();
   const [formError, setFormError] = useState("");
+  const { availabilityText } = useAvailabilitySchedule();
 
   const { formData, loading, status, handleChange, handleSubmit, resetStatus } = useContactForm();
 
@@ -94,7 +96,7 @@ const DlContact = () => {
       notify({ message: t("messageError"), type: "error" });
       resetStatus?.();
     }
-  }, [status]);
+  }, [status, notify, resetStatus, t, trackContactFormSubmit]);
 
   const onSubmit = async (e: React.FormEvent) => {
     setFormError("");
@@ -151,7 +153,7 @@ const DlContact = () => {
               </p>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="flex flex-col gap-4 lg:grid lg:grid-cols-2">
               <ContactInfoItem
                 icon={Mail}
                 label={t("email")}
@@ -162,7 +164,11 @@ const DlContact = () => {
               />
               <ContactInfoItem icon={Phone} label={t("phone")} value="+54 9 11 3251 3611" />
               <ContactInfoItem icon={MapPin} label={t("address")} value="Buenos Aires, Argentina" />
-              <ContactInfoItem icon={Briefcase} label={t("disponibility")} value={t("hours")} />
+              <ContactInfoItem
+                icon={Briefcase}
+                label={t("disponibility")}
+                value={availabilityText || "Disponible en tu zona: --:-- - --:--"}
+              />
             </div>
           </div>
         </div>

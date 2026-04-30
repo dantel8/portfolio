@@ -21,6 +21,8 @@ const skills = [
   { name: "MySQL", image: "MySQL.png" },
   { name: "Git", image: "Git.png" },
   { name: "GitHub", image: "GitHub.png" },
+  { name: "Deploy", image: "Deploy.png" },
+  { name: "AI", image: "Ai.png" },
 ];
 
 const DlSkills = () => {

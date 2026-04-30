@@ -9,8 +9,8 @@ import { useAnalytics } from "@/hooks/useAnalytics";
 
 const PROJECTS = [
   {
-    tag: "Product",/* 
-    date: { month: "APR", day: 28 }, */
+    tag: "Product",
+    date: { month: "APR", day: 28 },
     title: "ShiftYa",
     descriptionKey: "description_shiftya",
     imageUrl: "",
@@ -21,8 +21,8 @@ const PROJECTS = [
     screenshotService: "microlink" as ScreenshotService,
   },
   {
-    tag: "Product",/* 
-    date: { month: "APR", day: 28 }, */
+    tag: "Dev",
+    date: { month: "APR", day: 28 },
     title: "Turnow",
     descriptionKey: "description_turnow",
     imageUrl: "",
