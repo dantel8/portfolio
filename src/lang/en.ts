@@ -22,7 +22,7 @@ const en = {
     Experience: "Experience",
     hs_d1: "- Building 25+ UI components and complete screens (React + Tailwind + PrimeReact)",
     hs_d2: "- Integration of 15-20 endpoints, with unified error handling and loaders.",
-    hs_d3: "- Refactor large components: removal of 200/300 lines of unnecessary code.",
+    hs_d3: "- Refactoring large components: reducing unnecessary lines of code.",
     hs_d4: "- Optimization of application performance, reducing loading times by 30%.",
     hs_d5: "- Resolution of over 80 visual and logical problems originating from QA.",
     hs_d6: "- Preparation of 70+ daily reports for technical coordination.",
