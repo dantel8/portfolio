@@ -34,7 +34,7 @@ const DlHero = () => {
 
   return (
     <motion.section
-      className="relative min-h-[100svh] w-full overflow-hidden"
+      className="relative h-[100svh] w-full overflow-hidden"
       id="home"
       {...containerMotion}
     >
@@ -43,14 +43,14 @@ const DlHero = () => {
         loop
         muted
         playsInline
-        className="absolute left-1/2 top-1/2 h-auto min-h-full min-w-full max-w-none -translate-x-1/2 -translate-y-1/2 object-cover object-center md:object-[center_35%]"
+        className="absolute inset-0 h-full w-full object-cover object-center md:object-[center_35%]"
         src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_170732_8a9ccda6-5cff-4628-b164-059c500a2b41.mp4"
       />
 
       <div className="noise-overlay pointer-events-none absolute inset-0 opacity-50 mix-blend-overlay" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/20 to-black/75" />
 
-      <div className="relative mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-end px-4 pb-36 pt-24 text-[#f4f0e8] md:px-6 md:pb-12 md:pt-28">
+      <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-end px-4 pb-36 pt-24 text-[#f4f0e8] md:px-6 md:pb-12 md:pt-28">
         <motion.div
           {...itemMotion}
           className="mb-5 inline-flex w-fit items-center rounded-full border border-white/15 bg-black/30 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.25em] text-[#f4f0e8]/80 sm:px-4 sm:text-xs sm:tracking-[0.3em]"

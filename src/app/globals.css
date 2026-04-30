@@ -15,6 +15,24 @@
   scroll-behavior: smooth;
 }
 
+html,
+body {
+  height: 100%;
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  font-family: var(--font-nunito), sans-serif;
+  min-height: 100vh;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
 html.dark body {
   --background-color: #1e1e1e;
   --text-color: #f5f5f5;
@@ -33,12 +51,6 @@ html.dark body {
 html.light body {
   --background-color: #fffdf4;
   --text-color: #333333;
-  background-color: var(--background-color);
-  color: var(--text-color);
-}
-
-body {
-  font-family: var(--font-nunito), sans-serif;
 }
 
 .font-display {
@@ -63,7 +75,8 @@ body {
 
 @layer utilities {
   .scrollbar-none {
-    @apply overflow-auto;
+    overflow-x: auto;
+    overflow-y: hidden;
     scrollbar-width: none;
     -ms-overflow-style: none;
   }

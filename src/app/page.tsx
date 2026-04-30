@@ -13,7 +13,7 @@ export default function Home() {
     <div className="relative isolate min-h-screen overflow-x-hidden">
       <DlHeader />
       <div className="relative">
-        <main className="overflow-x-hidden pb-28 md:pb-0">
+        <main className="pb-28 md:pb-0">
           <DlHero />
           <div className="relative">
             <BGPattern variant="grid" mask="fade-edges" size={40} fill="rgba(96, 206, 90, 0.1)" />
